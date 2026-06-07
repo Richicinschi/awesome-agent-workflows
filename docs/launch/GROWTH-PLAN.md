@@ -25,7 +25,7 @@ Audience:
 ## Launch assets to prepare
 
 - README screenshot/social card.
-- 30-second demo GIF showing a workflow copied into an agent.
+- [Demo GIF](../../assets/demo-workflow.gif) showing a workflow copied into an agent and verified.
 - Short launch thread with three concrete examples.
 - Show HN post focused on lessons learned, not hype.
 - Reddit post for communities that allow project sharing.
@@ -61,9 +61,13 @@ Day 4-7:
 
 ### Short post
 
-I made a practical workflow library for AI coding agents: specs, parallel agents, fresh-context review, debugging, browser QA, security review, release runbooks, and repo launch checklists.
+I made Awesome Agent Workflows: a vendor-neutral library of copy-pasteable operating procedures for coding agents.
 
-Repo: https://github.com/Richicinschi/awesome-agent-workflows
+Not prompt dumps. Each workflow card includes goal, scope boundaries, verification gates, stop conditions, and the final evidence format.
+
+Use it for fresh-context review, regression-test-first bug fixes, parallel worktrees, CI red-to-green, release runbooks, and safe public repo launches.
+
+Demo and repo: https://github.com/Richicinschi/awesome-agent-workflows
 
 ### Show HN draft
 

@@ -39,6 +39,10 @@ Verification: Run python3 scripts/lint_repo.py and report the exact output.
 Stop conditions: Ask before publishing, deleting files, or changing repository settings.
 ```
 
+![Demo: pick an agent workflow, copy its brief, run verification, and report evidence](assets/demo-workflow.gif)
+
+The demo uses a synthetic example repo (`src/cart` and `tests/cart`) to show the core loop: choose a workflow, paste the bounded brief into any agent, require verification evidence, then report files changed and remaining risks.
+
 Start with [`templates/agent-brief.md`](templates/agent-brief.md), then browse the full catalog in [`docs/WORKFLOW-CATALOG.md`](docs/WORKFLOW-CATALOG.md).
 
 ## Workflow library
