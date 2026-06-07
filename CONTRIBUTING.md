@@ -35,3 +35,7 @@ python3 scripts/lint_repo.py
 - Prefer commands, checklists, and examples over theory.
 - Do not include secrets, private customer data, or proprietary prompts.
 - Avoid hype. Explain the operational value.
+
+## Roadmap
+
+See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the next high-value contribution clusters.

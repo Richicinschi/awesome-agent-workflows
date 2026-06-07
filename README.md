@@ -7,29 +7,29 @@
 
 ![Awesome Agent Workflows banner](assets/banner.svg)
 
-AI agents are powerful, but most examples stop at toy prompts. This repo collects **field-tested workflows**: how to hand off a task, constrain an agent, verify its work, recover when it drifts, and ship without trusting vibes.
+AI agents are powerful, but most examples stop at toy prompts. This repo collects **operational workflows**: how to hand off a task, constrain an agent, verify its work, recover when it drifts, and ship without trusting vibes.
 
-Use it with Claude Code, Codex CLI, Cursor agents, Aider, OpenCode, Gemini CLI, LangGraph, CrewAI, custom tool-using agents, or any assistant that can read instructions and run tools.
+This is not an agent framework. It is not a prompt dump. It is a library of practical operating procedures for people using Claude Code, Codex CLI, Cursor agents, Aider, OpenCode, Gemini-style agents, local agents, LangGraph/CrewAI systems, or custom tool-using assistants.
 
-## Why this exists
+## Start here by situation
 
-The bottleneck is no longer "can an agent write code?" The bottleneck is **operating agents safely**:
-
-- turning fuzzy requests into executable specs;
-- splitting work across parallel agents without merge chaos;
-- forcing evidence before "done" claims;
-- reviewing code from a fresh context;
-- keeping secrets, production, and public repos safe;
-- launching useful projects without spam or fake engagement.
-
-This repository is a practical playbook for that work.
+- **I have a vague feature request** → [Spec → Plan → Implementation](workflows/01-spec-to-plan.md)
+- **I want to run agents in parallel** → [Parallel Agent Development](workflows/02-parallel-agent-development.md) + [Git Worktree Agent Lanes](workflows/35-git-worktree-agent-lanes.md)
+- **The agent says it fixed a bug, but I do not trust it** → [Regression-Test-First Bug Fix](workflows/13-regression-test-first-bugfix.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
+- **CI failed after an agent change** → [CI Red-to-Green Reproducer](workflows/19-ci-red-to-green.md)
+- **Tests are flaky** → [Flaky Test Burn-Down](workflows/20-flaky-test-burndown.md)
+- **I am about to merge AI-generated code** → [Agent Patch Intake Triage](workflows/16-patch-intake-triage.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
+- **I am changing APIs or schemas** → [API Contract Change Lockstep](workflows/18-api-contract-lockstep.md)
+- **I am doing a public release** → [Release Runbook](workflows/07-release-runbook.md) + [Secrets and Config Audit](workflows/38-secrets-config-audit.md)
+- **I am launching a public repo** → [Repo Growth Launch](workflows/10-repo-growth-launch.md)
+- **A long session is about to compact or hand off** → [Context Compaction and Handoff](workflows/36-context-compaction-handoff.md)
 
 ## Quick start
 
 1. Pick the workflow that matches your situation.
 2. Copy the **Agent brief** into your agent tool.
-3. Fill in the variables.
-4. Run the verification steps before merging or shipping.
+3. Fill in the bracketed variables.
+4. Run the verification steps before merging, deploying, or reporting success.
 
 ```text
 Goal: Add a workflow card for fresh-context code review.
@@ -39,64 +39,41 @@ Verification: Run python3 scripts/lint_repo.py and report the exact output.
 Stop conditions: Ask before publishing, deleting files, or changing repository settings.
 ```
 
-Start here: [`templates/agent-brief.md`](templates/agent-brief.md)
+Start with [`templates/agent-brief.md`](templates/agent-brief.md), then browse the full catalog in [`docs/WORKFLOW-CATALOG.md`](docs/WORKFLOW-CATALOG.md).
 
 ## Workflow library
 
-| Workflow | Use when | Output |
-| --- | --- | --- |
-| [Spec → Plan → Implementation](workflows/01-spec-to-plan.md) | the request is vague or multi-step | design, plan, implementation checklist |
-| [Parallel Agent Development](workflows/02-parallel-agent-development.md) | 2+ independent tasks can run at once | bounded subagent tasks + integration pass |
-| [Root-Cause Debugging](workflows/03-bug-root-cause.md) | a bug is unclear or recurring | reproduction, hypothesis tree, verified fix |
-| [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md) | before merge or public release | spec compliance + quality/security review |
-| [Security Review Sprint](workflows/05-security-review.md) | auth, secrets, network, permissions, parsers | threat model + findings with evidence |
-| [Browser Runtime QA](workflows/06-browser-qa.md) | web UI or browser automation changes | screenshots, console/network checks, bug report |
-| [Release Runbook](workflows/07-release-runbook.md) | publishing, deploying, or announcing | staged launch + rollback triggers |
-| [Research Brief](workflows/08-research-brief.md) | market/API/library decisions | source-backed brief + recommendation |
-| [Local AI Stack Setup](workflows/09-local-ai-stack.md) | self-hosted/local LLM agents | reproducible install and health checks |
-| [Repo Growth Launch](workflows/10-repo-growth-launch.md) | making a public repo useful and discoverable | README, topics, demos, launch checklist |
+The repository now includes **40 workflow cards** across planning, execution, debugging, review, testing, CI, release, security, operations, team process, evaluation, product, and documentation.
 
-For a compact index, see [`docs/WORKFLOW-CATALOG.md`](docs/WORKFLOW-CATALOG.md).
+A few high-value cards:
 
-## Workflow card format
+- [Change Impact Map](workflows/11-change-impact-map.md) — map blast radius before editing unfamiliar code.
+- [Agent Task Contract and Scope Box](workflows/12-agent-task-contract.md) — delegate without drive-by edits.
+- [Golden Master Refactor](workflows/15-golden-master-refactor.md) — refactor legacy code safely.
+- [Dependency Upgrade Shepherd](workflows/21-dependency-upgrade-shepherd.md) — upgrade libraries with rollback notes.
+- [Migration Readiness and Cutover Planner](workflows/25-migration-cutover-planner.md) — stage risky migrations.
+- [Workflow Evaluation Harness](workflows/30-workflow-evaluation-harness.md) — evaluate agent workflows before rollout.
+- [Prompt and Policy Change Control](workflows/31-prompt-policy-change-control.md) — change prompts and guardrails safely.
+- [MCP and Tool Integration Review](workflows/37-mcp-tool-integration-review.md) — review tool permissions and data flow.
+- [Secrets and Config Audit](workflows/38-secrets-config-audit.md) — check public-release and CI safety.
 
-Each workflow uses the same structure:
+For machine-readable metadata, see [`agent-workflows.json`](agent-workflows.json).
 
-- **Trigger** — when to use it.
-- **Goal** — what should be true at the end.
-- **Agent brief** — copy-paste prompt skeleton.
-- **Steps** — ordered, bounded execution loop.
-- **Verification** — evidence required before claiming success.
-- **Failure modes** — common ways agents drift.
-- **Human gate** — decisions that should not be automated silently.
+## Tool adapters
 
-Template: [`templates/workflow-card.md`](templates/workflow-card.md)
+Use the same workflows with different agents:
 
-## Recommended tools and references
+- [Claude Code](docs/tools/claude-code.md)
+- [Codex CLI](docs/tools/codex-cli.md)
+- [Cursor agents](docs/tools/cursor.md)
+- [Aider](docs/tools/aider.md)
+- [OpenCode](docs/tools/opencode.md)
+- [Local/self-hosted agents](docs/tools/local-agents.md)
+- [Agent tool comparison matrix](docs/tools/comparison-matrix.md)
 
-### Agent workflow inspiration
+## Worked example
 
-- [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) — Claude Code ecosystem list.
-- [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) — agent skills and reusable capabilities.
-- [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) — specialized subagent patterns.
-- [milisp/codexia](https://github.com/milisp/codexia) — agent workstation patterns for Codex/Claude-style tools.
-- [rohitg00/awesome-ai-apps](https://github.com/rohitg00/awesome-ai-apps) — real-world AI app examples.
-
-### Agent frameworks and CLIs
-
-- [OpenAI Codex](https://github.com/openai/codex)
-- [OpenAI Agents Python](https://github.com/openai/openai-agents-python)
-- [Anthropic Claude Code docs](https://docs.anthropic.com/en/docs/claude-code)
-- [Aider](https://github.com/Aider-AI/aider)
-- [OpenCode](https://github.com/sst/opencode)
-- [LangGraph](https://github.com/langchain-ai/langgraph)
-- [CrewAI](https://github.com/crewAIInc/crewAI)
-
-### Quality gates
-
-- [templates/pr-review.md](templates/pr-review.md)
-- [templates/release-checklist.md](templates/release-checklist.md)
-- [`scripts/lint_repo.py`](scripts/lint_repo.py) for local repository hygiene checks.
+See [`examples/fresh-context-review-catches-unverified-pr.md`](examples/fresh-context-review-catches-unverified-pr.md) for an end-to-end example of using a workflow to catch an agent’s unverified completion claim.
 
 ## What makes a workflow good?
 
@@ -120,7 +97,7 @@ Good contributions include:
 - a launch, QA, review, or debugging checklist;
 - a link to a high-quality public resource with a short explanation.
 
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a PR.
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`docs/curation-policy.md`](docs/curation-policy.md) before opening a PR.
 
 ## Public launch plan
 
