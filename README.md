@@ -5,6 +5,8 @@
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Awesome Agent Workflows banner](assets/banner.svg)
+
 AI agents are powerful, but most examples stop at toy prompts. This repo collects **field-tested workflows**: how to hand off a task, constrain an agent, verify its work, recover when it drifts, and ship without trusting vibes.
 
 Use it with Claude Code, Codex CLI, Cursor agents, Aider, OpenCode, Gemini CLI, LangGraph, CrewAI, custom tool-using agents, or any assistant that can read instructions and run tools.
