@@ -26,6 +26,9 @@ Audience:
 
 - README screenshot/social card.
 - [Demo GIF](../../assets/demo-workflow.gif) showing a workflow copied into an agent and verified.
+- [Launch Pack](LAUNCH-PACK.md) with post-ready copy and reply templates.
+- [Posting Checklist](POSTING-CHECKLIST.md) for a staged, feedback-first launch.
+- [Community Issue Seeds](COMMUNITY-ISSUE-SEEDS.md) for participation hooks.
 - Short launch thread with three concrete examples.
 - Show HN post focused on lessons learned, not hype.
 - Reddit post for communities that allow project sharing.
