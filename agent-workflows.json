@@ -1,0 +1,12 @@
+[
+  {"id":"spec-to-plan","title":"Spec → Plan → Implementation","path":"workflows/01-spec-to-plan.md","category":"planning"},
+  {"id":"parallel-agent-development","title":"Parallel Agent Development","path":"workflows/02-parallel-agent-development.md","category":"execution"},
+  {"id":"bug-root-cause","title":"Root-Cause Debugging","path":"workflows/03-bug-root-cause.md","category":"debugging"},
+  {"id":"fresh-context-code-review","title":"Fresh-Context Code Review","path":"workflows/04-fresh-context-code-review.md","category":"review"},
+  {"id":"security-review","title":"Security Review Sprint","path":"workflows/05-security-review.md","category":"security"},
+  {"id":"browser-runtime-qa","title":"Browser Runtime QA","path":"workflows/06-browser-qa.md","category":"qa"},
+  {"id":"release-runbook","title":"Release Runbook","path":"workflows/07-release-runbook.md","category":"launch"},
+  {"id":"research-brief","title":"Research Brief","path":"workflows/08-research-brief.md","category":"research"},
+  {"id":"local-ai-stack","title":"Local AI Stack Setup","path":"workflows/09-local-ai-stack.md","category":"infrastructure"},
+  {"id":"repo-growth-launch","title":"Repo Growth Launch","path":"workflows/10-repo-growth-launch.md","category":"growth"}
+]
