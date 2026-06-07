@@ -34,7 +34,7 @@ This catalog helps you choose the right workflow before handing real work to an 
 ### Testing
 - [`20` Flaky Test Burn-Down](../workflows/20-flaky-test-burndown.md) — A test passes on rerun but fails intermittently.
 
-### Ci
+### CI
 - [`19` CI Red-to-Green Reproducer](../workflows/19-ci-red-to-green.md) — CI fails after an agent change.
 
 ### Review
@@ -90,7 +90,7 @@ This catalog helps you choose the right workflow before handing real work to an 
 ### Growth
 - [`10` Repo Growth Launch](../workflows/10-repo-growth-launch.md) — A public repository needs useful packaging and launch readiness.
 
-### Qa
+### QA
 - [`06` Browser Runtime QA](../workflows/06-browser-qa.md) — A browser app, page, or automation flow needs validation.
 
 ## Risk levels

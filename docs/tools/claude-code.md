@@ -18,3 +18,7 @@ Paste the workflow into the Claude Code session before asking for implementation
 ```text
 Use the selected workflow exactly. Stay within the allowed files. Record evidence from commands or files. Stop if the task needs secrets, production access, destructive commands, or a wider scope.
 ```
+
+## Official reference
+
+- [Claude Code official docs](https://docs.anthropic.com/en/docs/claude-code)

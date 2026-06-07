@@ -18,3 +18,7 @@ Use the cards as local operating procedures for private agents running with loca
 ```text
 Use the selected workflow exactly. Stay within the allowed files. Record evidence from commands or files. Stop if the task needs secrets, production access, destructive commands, or a wider scope.
 ```
+
+## Official reference
+
+- [LangGraph repository](https://github.com/langchain-ai/langgraph)

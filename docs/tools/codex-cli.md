@@ -18,3 +18,7 @@ Use workflow cards as the task instruction for a bounded Codex run. Include bran
 ```text
 Use the selected workflow exactly. Stay within the allowed files. Record evidence from commands or files. Stop if the task needs secrets, production access, destructive commands, or a wider scope.
 ```
+
+## Official reference
+
+- [OpenAI Codex repository](https://github.com/openai/codex)

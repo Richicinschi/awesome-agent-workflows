@@ -18,3 +18,7 @@ Use workflow cards as reusable task prompts for terminal-native coding work.
 ```text
 Use the selected workflow exactly. Stay within the allowed files. Record evidence from commands or files. Stop if the task needs secrets, production access, destructive commands, or a wider scope.
 ```
+
+## Official reference
+
+- [OpenCode repository](https://github.com/sst/opencode)
