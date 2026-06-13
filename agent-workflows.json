@@ -719,5 +719,23 @@
       "long-running-tasks"
     ],
     "verification": "Run the workflow checklist and record command/output evidence before claiming success."
+  },
+  {
+    "id": "agent-generated-test-review",
+    "title": "Agent-Generated Test Review",
+    "path": "workflows/41-agent-generated-test-review.md",
+    "category": "review",
+    "risk_level": "medium",
+    "trigger": "An agent added tests, and coverage quality needs review before trusting the patch.",
+    "goal": "Accept tests that protect real behavior and reject tests that only verify mocks, implementation details, or unproven assumptions.",
+    "tools": [
+      "all coding agents"
+    ],
+    "tags": [
+      "tests",
+      "review",
+      "regression-evidence"
+    ],
+    "verification": "Run the workflow checklist and record red/green or mutation evidence plus test command output before claiming coverage is adequate."
   }
 ]
