@@ -16,6 +16,7 @@ This is not an agent framework. It is not a prompt dump. It is a library of prac
 - **I have a vague feature request** → [Spec → Plan → Implementation](workflows/01-spec-to-plan.md)
 - **I want to run agents in parallel** → [Parallel Agent Development](workflows/02-parallel-agent-development.md) + [Git Worktree Agent Lanes](workflows/35-git-worktree-agent-lanes.md)
 - **The agent says it fixed a bug, but I do not trust it** → [Regression-Test-First Bug Fix](workflows/13-regression-test-first-bugfix.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
+- **An agent added tests, but I do not trust the coverage** → [Agent-Generated Test Review](workflows/41-agent-generated-test-review.md)
 - **CI failed after an agent change** → [CI Red-to-Green Reproducer](workflows/19-ci-red-to-green.md)
 - **Tests are flaky** → [Flaky Test Burn-Down](workflows/20-flaky-test-burndown.md)
 - **I am about to merge AI-generated code** → [Agent Patch Intake Triage](workflows/16-patch-intake-triage.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
@@ -47,7 +48,7 @@ Start with [`templates/agent-brief.md`](templates/agent-brief.md), then browse t
 
 ## Workflow library
 
-The repository now includes **40 workflow cards** across planning, execution, debugging, review, testing, CI, release, security, operations, team process, evaluation, product, and documentation.
+The repository now includes **41 workflow cards** across planning, execution, debugging, review, testing, CI, release, security, operations, team process, evaluation, product, and documentation.
 
 A few high-value cards:
 
