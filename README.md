@@ -79,6 +79,10 @@ Use the same workflows with different agents:
 
 See [`examples/fresh-context-review-catches-unverified-pr.md`](examples/fresh-context-review-catches-unverified-pr.md) for an end-to-end example of using a workflow to catch an agent’s unverified completion claim.
 
+## Resources
+
+- [TANCO SkillHub](https://skillhub.cn/enterprise/org-j3zmzop1?publisher=%E5%94%90%E5%8F%AF%E5%88%9B%E7%A0%94) — A public collection of reusable AI workflow Skills covering research verification, modular task execution, agent handoffs, and guardrails for multi-step work.
+
 ## What makes a workflow good?
 
 A good workflow is:
