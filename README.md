@@ -104,6 +104,7 @@ Use the same workflows with different agents:
 - [Fresh-context review catches an unverified PR](examples/fresh-context-review-catches-unverified-pr.md): using a workflow to catch an agent’s unverified completion claim, end to end.
 - [Diff review catches agent scope drift](examples/agent-scope-drift-caught-by-diff-review.md): the agent finished the task but also edited unrelated files.
 - [Agent claims tests passed without running them](examples/agent-claims-tests-passed.md): the verification gate that turns "tests pass" into evidence.
+- [Production database deleted during a code freeze](examples/agent-deletes-production-database.md): the public July 2025 incident, and why a freeze has to be enforced by the tools, not by instructions.
 
 ### Field stories
 

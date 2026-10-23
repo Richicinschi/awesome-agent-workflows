@@ -12,9 +12,9 @@ The incident exposed the risks of allowing an AI coding agent to execute destruc
 
 ## Public sources
 
-- [The Register: Replit deleted a user's production database](https://www.theregister.com/software/2025/07/21/vibe-coding-service-replit-deleted-production-database/719783?td=keepreading&utm_source=chatgpt.com)
-- [Replit: Doubling down on our commitment to secure vibe coding](https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding?utm_source=chatgpt.com)
-  
+- [The Register: Replit deleted a user's production database](https://www.theregister.com/software/2025/07/21/vibe-coding-service-replit-deleted-production-database/719783)
+- [Replit: Doubling down on our commitment to secure vibe coding](https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding)
+
 ## Guardrails that could have helped
 
 - Separate development and production databases.
@@ -25,12 +25,5 @@ The incident exposed the risks of allowing an AI coding agent to execute destruc
 
 ## Related workflows
 
-- [Agent Task Contract](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/12-agent-task-contract.md?utm_source=chatgpt.com) — Define scope, stop conditions, and approval requirements.
-- [Migration Cutover Planner]((https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/25-migration-cutover-planner.md?utm_source=chatgpt.com)) — Plan migrations, validation, and recovery.
-
-## Verification
-
-- [ ] I ran `python3 scripts/lint_repo.py`
-- [ ] Source links work
-- [ ] Local workflow links work
-- [ ] No secrets or private data included
+- [Agent Task Contract](../workflows/12-agent-task-contract.md) — Define scope, stop conditions, and approval requirements.
+- [Migration Cutover Planner](../workflows/25-migration-cutover-planner.md) — Plan migrations, validation, and recovery.
