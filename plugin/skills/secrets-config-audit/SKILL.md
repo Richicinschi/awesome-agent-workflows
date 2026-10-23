@@ -1,6 +1,6 @@
 ---
 name: secrets-config-audit
-description: "Use when before public release, CI setup, deployment, or repository handoff. Find exposed secrets, unsafe defaults, config drift, and docs that request secrets insecurely."
+description: "Use before public release, CI setup, deployment, or repository handoff. Find exposed secrets, unsafe defaults, config drift, and docs that request secrets insecurely."
 ---
 
 # Secrets and Config Audit

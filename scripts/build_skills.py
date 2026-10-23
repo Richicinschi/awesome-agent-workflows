@@ -46,7 +46,11 @@ def render(item: dict) -> str:
     text = (ROOT / item["path"]).read_text(encoding="utf-8").replace("\r\n", "\n")
     found = sections(text)
     trigger = item["trigger"].rstrip(".")
-    description = f"Use when {trigger[0].lower()}{trigger[1:]}. {item['goal']}"
+    first = trigger.split()[0]
+    if not (len(first) > 1 and first.isupper()):  # keep acronyms such as "CI" intact
+        trigger = trigger[0].lower() + trigger[1:]
+    lead = "Use" if trigger.split()[0] in ("before", "after", "during", "while", "when") else "Use when"
+    description = f"{lead} {trigger}. {item['goal']}"
     body = [
         "---",
         f"name: {item['id']}",

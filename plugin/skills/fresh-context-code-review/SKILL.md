@@ -1,6 +1,6 @@
 ---
 name: fresh-context-code-review
-description: "Use when before merging or trusting agent-authored code. Review without author-context contamination."
+description: "Use before merging or trusting agent-authored code. Review without author-context contamination."
 ---
 
 # Fresh-Context Code Review

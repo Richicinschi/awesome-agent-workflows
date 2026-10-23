@@ -1,6 +1,6 @@
 ---
 name: ci-red-to-green
-description: "Use when cI fails after an agent change. Reproduce or explain CI failure before pushing fixes."
+description: "Use when CI fails after an agent change. Reproduce or explain CI failure before pushing fixes."
 ---
 
 # CI Red-to-Green Reproducer

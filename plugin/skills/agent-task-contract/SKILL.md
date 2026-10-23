@@ -1,6 +1,6 @@
 ---
 name: agent-task-contract
-description: "Use when before delegating a task to an AI agent. Give the agent a contract that prevents drive-by edits and unsupported success claims."
+description: "Use before delegating a task to an AI agent. Give the agent a contract that prevents drive-by edits and unsupported success claims."
 ---
 
 # Agent Task Contract and Scope Box
