@@ -41,6 +41,7 @@ This catalog helps you choose the right workflow before handing real work to an 
 - [`04` Fresh-Context Code Review](../workflows/04-fresh-context-code-review.md) — Before merging or trusting agent-authored code.
 - [`16` Agent Patch Intake Triage](../workflows/16-patch-intake-triage.md) — An agent returns a diff, branch, patch, or pull request.
 - [`17` Review Feedback Application Loop](../workflows/17-review-feedback-loop.md) — A reviewer left comments on an agent-authored PR.
+- [`41` Agent-Generated Test Review](../workflows/41-agent-generated-test-review.md) — An agent added tests and coverage quality needs review.
 
 ### Refactoring
 - [`15` Golden Master Refactor](../workflows/15-golden-master-refactor.md) — Refactoring legacy or under-tested code where behavior must stay stable.
