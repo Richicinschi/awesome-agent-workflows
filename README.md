@@ -82,6 +82,14 @@ Use the same workflows with different agents:
 - [Diff review catches agent scope drift](examples/agent-scope-drift-caught-by-diff-review.md): the agent finished the task but also edited unrelated files.
 - [Agent claims tests passed without running them](examples/agent-claims-tests-passed.md): the verification gate that turns "tests pass" into evidence.
 
+### Field stories
+
+Real incidents from a one-person studio running up to ten coding-agent sessions at once, each with the guardrail that came out of it:
+
+- [A guardrail built for one agent became a 90% false alarm at ten](examples/field-story-one-guardrail-ten-agents.md): why hub-wide checks break under parallel agents, and the recency rule that fixed it.
+- [Eight ways a green test suite proved nothing](examples/field-story-tests-that-cannot-fail.md): tests that could not fail, every one caught by review or mutation testing, none by the suite.
+- [When the verification evidence itself was wrong](examples/field-story-verification-evidence-lied.md): pipes that ate exit codes, swallowed summaries, and 17 tests that silently became skips.
+
 ## What makes a workflow good?
 
 A good workflow is:
