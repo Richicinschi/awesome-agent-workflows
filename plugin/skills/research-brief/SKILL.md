@@ -1,6 +1,6 @@
 ---
 name: research-brief
-description: "Use when a decision depends on current facts or external sources. Produce a source-backed recommendation and uncertainty list."
+description: "Use when a decision depends on current facts or external sources. Produce a brief where every finding has a source actually read, a mechanism and a confidence label, with the search filter's blind spots named and a skeptic pass done."
 ---
 
 # Research Brief

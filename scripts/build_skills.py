@@ -22,8 +22,18 @@ LOCAL_LINK = re.compile(r"\]\((?!https?://|mailto:|#)([^)]+)\)")
 
 
 def sections(text: str) -> dict[str, str]:
-    parts = re.split(r"^## (.+)$", text, flags=re.MULTILINE)
-    return {parts[i].strip(): parts[i + 1].strip() for i in range(1, len(parts) - 1, 2)}
+    found: dict[str, list[str]] = {}
+    current = None
+    fenced = False
+    for line in text.split("\n"):
+        if line.startswith("```"):
+            fenced = not fenced
+        if not fenced and line.startswith("## "):
+            current = line[3:].strip()
+            found[current] = []
+        elif current is not None:
+            found[current].append(line)
+    return {name: "\n".join(lines).strip() for name, lines in found.items()}
 
 
 def absolute_links(text: str, card: str) -> str:
@@ -34,6 +44,8 @@ def absolute_links(text: str, card: str) -> str:
         parts: list[str] = []
         for piece in target.split("/"):
             if piece == "..":
+                if not parts:
+                    raise SystemExit(f"{card}: link climbs above the repo root: {match.group(1)}")
                 parts.pop()
             elif piece != ".":
                 parts.append(piece)

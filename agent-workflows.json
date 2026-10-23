@@ -7,7 +7,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "The request is vague or multi-step.",
-    "goal": "Turn a fuzzy idea into a spec, plan, and implementation checklist.",
+    "goal": "Drill a vague request into an approved spec, then a plan whose every task carries its own verification command, so nothing gets built on a guess.",
     "tools": [
       "all coding agents"
     ],
@@ -26,7 +26,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "Multiple independent tasks can run at once.",
-    "goal": "Split work safely and integrate results.",
+    "goal": "Run agents in parallel on measured, disjoint file sets with one lead owning shared files and integration, accepting work only from what is on disk.",
     "tools": [
       "all coding agents"
     ],
@@ -64,7 +64,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "Before merging or trusting agent-authored code.",
-    "goal": "Review without author-context contamination.",
+    "goal": "Get one independent review from a reviewer that never saw the author's reasoning, re-runs the evidence itself and ends with file:line findings and a verdict.",
     "tools": [
       "all coding agents"
     ],
@@ -140,7 +140,7 @@
     "risk_level": "low",
     "status": "field-tested",
     "trigger": "A decision depends on current facts or external sources.",
-    "goal": "Produce a source-backed recommendation and uncertainty list.",
+    "goal": "Produce a brief where every finding has a source actually read, a mechanism and a confidence label, with the search filter's blind spots named and a skeptic pass done.",
     "tools": [
       "web-capable agents"
     ],
@@ -178,7 +178,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "A public repository needs useful packaging and launch readiness.",
-    "goal": "Make a repo discoverable without fake engagement or spam.",
+    "goal": "Launch a public repo honestly: content that survives a click-through, one rule-following submission per venue, fast replies to contributors, and every public action by the maintainer.",
     "tools": [
       "all agents"
     ],
@@ -216,7 +216,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "Before delegating a task to an AI agent.",
-    "goal": "Give the agent a contract that prevents drive-by edits and unsupported success claims.",
+    "goal": "Give the agent a brief it can execute alone: one outcome, a measured edit list, forbidden actions, earlier lessons, a done condition that is a command, and a report checkable on disk.",
     "tools": [
       "all coding agents"
     ],
@@ -235,7 +235,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "A bug has a concrete symptom or user report.",
-    "goal": "Capture the bug as a failing test before changing production code.",
+    "goal": "Capture the bug as a test that goes red on the exact symptom, green after the fix and red again when the fix is removed, with the cause marked measured or inferred.",
     "tools": [
       "all coding agents"
     ],
@@ -349,7 +349,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "CI fails after an agent change.",
-    "goal": "Reproduce or explain CI failure before pushing fixes.",
+    "goal": "Reproduce the failing item alone with its full output and real exit code, name the failed component, fix the cause and show counts matching the baseline.",
     "tools": [
       "all coding agents"
     ],
@@ -596,7 +596,7 @@
     "risk_level": "high",
     "status": "field-tested",
     "trigger": "Memory feels wrong, stale, conflicting, too full, or privacy-sensitive.",
-    "goal": "Deduplicate, expire, redact, and scope memories without losing useful preferences.",
+    "goal": "Keep agent memory small, true as of today and lossless: free space by archiving full text with a pointer left behind, never by deleting, and make corrections visible.",
     "tools": [
       "memory-enabled agents"
     ],
@@ -653,7 +653,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "Multiple agents or humans need to work in the same repo concurrently.",
-    "goal": "Use worktrees and branch naming to isolate lanes and avoid stomping shared state.",
+    "goal": "Give each agent its own worktree and branch cut from a fresh remote main, reaching main only through human-merged branches, never touching what another session owns.",
     "tools": [
       "coding agents with git"
     ],
@@ -672,7 +672,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "A long agent session is about to compact, hand off, or restart.",
-    "goal": "Preserve the minimum operational state needed for the next agent to continue safely.",
+    "goal": "Close a long session so the next one can continue from files alone: work pushed, branches tidy, lessons in memory, current state written as verified reality.",
     "tools": [
       "long-context agents"
     ],
@@ -691,7 +691,7 @@
     "risk_level": "high",
     "status": "field-tested",
     "trigger": "Adding or changing an MCP server, tool, plugin, or external integration.",
-    "goal": "Review permissions, data flow, failure modes, and least-privilege configuration.",
+    "goal": "Let nothing reach an agent until it passes a security scan, a human has read what it can execute and reach, and it fills a real gap; adopt only the smallest safe part.",
     "tools": [
       "tool-using agents",
       "MCP"
@@ -711,7 +711,7 @@
     "risk_level": "high",
     "status": "field-tested",
     "trigger": "Before public release, CI setup, deployment, or repository handoff.",
-    "goal": "Find exposed secrets, unsafe defaults, config drift, and docs that request secrets insecurely.",
+    "goal": "Before a public push, prove the repo and its whole history carry no secrets, network details, personal data or process traces, and escalate what cannot be removed.",
     "tools": [
       "all coding agents"
     ],
@@ -749,7 +749,7 @@
     "risk_level": "medium",
     "status": "field-tested",
     "trigger": "A build, migration, scrape, benchmark, agent run, or batch job will run for a while.",
-    "goal": "Track progress, logs, exit conditions, and recovery without losing the process.",
+    "goal": "Run long jobs where the agent session cannot kill them, with logs that outlive it, a heartbeat, a clean stop and evidence of what was produced.",
     "tools": [
       "all agents"
     ],

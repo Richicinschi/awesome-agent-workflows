@@ -81,8 +81,8 @@ A human clears every high or critical finding before adoption, approves any paid
 
 - The standing rule is "never fork an external skill without scanning it first". The scan gates; adapting comes after and is separate work. The studio uses [SkillSpector](https://github.com/NVIDIA/SkillSpector), an open-source skill scanner, with the static pass only by default.
 - In one wave of four adopted skills, three scored 100/100 critical, "do not install". All three were false positives, checked line by line. The scanner read settings loaded from a `.env` file as credential access, the official `curl ... | sh` installer as chaining, and plain "Rules:" guidance as prompt extraction, and it also flagged an apt-cache `rm -rf` cleanup. None shipped a script the skill runs.
-- An agent framework of about 59 generated skills was reviewed one by one: 59 skip, 0 adopted, 2 marginal folds. Nearly every skill hardcoded a long preamble bound to the framework's own runtime, so a copied folder would have done nothing.
-- A research sweep over about 185 candidates adopted zero MCP servers, agents or skills. All four proposed MCP servers collapsed on verification, three because a `curl` or two lines of code did the same job. The recorded reasons were the durable output.
+- An agent framework of about 59 generated skills was reviewed one by one: every skill skipped and none adopted; two ideas were marginal folds. Nearly every skill hardcoded a long preamble bound to the framework's own runtime, so a copied folder would have done nothing.
+- A research sweep over about 185 candidates ([Research Brief](08-research-brief.md)) adopted no MCP server, agent or skill: all four proposed MCP servers collapsed on verification, three because a `curl` call or two lines of code did the same job.
 - Popularity misled in four separate ways: "pushed yesterday" on a repo whose default branch was over two years stale, a package last published years before its repo's latest push, a skills repo with about 30k stars and no licence file, and a popular web library that does nothing on current phones since an OS patch.
 
 ## Related workflows

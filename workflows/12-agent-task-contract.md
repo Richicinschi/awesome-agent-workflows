@@ -70,12 +70,12 @@ Report:
 ## Failure modes
 
 - **Context the agent never had.** The brief leans on your conversation, so the agent fills the gaps with guesses.
-- **An inferred edit list.** In one sub-project the list was too narrow four separate times, each discovered only after the agents finished.
+- **An inferred edit list.** A list written from memory can come out too narrow, and the gap shows only after the agents finish. A case where that happened four times is in [Parallel Agent Development](02-parallel-agent-development.md).
 - **A silent scope box.** Nothing forbids git operations or builds in a shared checkout, so a well-meaning agent commits, stashes or rebuilds under other live sessions.
-- **Trusting the summary.** An agent reported success while silently skipping an entire assigned spec file. Only checking the files on disk caught it.
+- **Trusting the summary.** A success report can hide a skipped file; only the files on disk show it. The skipped spec file is told in [Parallel Agent Development](02-parallel-agent-development.md).
 - **Re-teaching by message.** A correction sent in chat helps one agent; the next agent repeats the mistake.
 - **Briefs from a stale plan.** A rename landed in code but not in the plan, so the next wave was briefed against a field that no longer existed.
-- **Ceremony on routine work.** Identical implement-then-review cycles on mechanical tasks added noise, not safety, and the human stopped them as too repetitive.
+- **Ceremony on routine work.** Identical implement-then-review cycles on mechanical tasks add noise, not safety. The loop the human stopped as too repetitive is told in [Fresh-Context Code Review](04-fresh-context-code-review.md).
 
 ## Human gate
 
@@ -83,9 +83,9 @@ The human approves the scope box (edit list, forbidden actions, done condition) 
 
 ## Field notes
 
-- The dispatch-lessons file came out of a campaign of sequential implementer agents. One stalled by ending its turn while a full test run was still going in the background, leaving its work uncommitted. The human's directive: learn from agent limitations as they happen, so no later agent repeats them. The file sits next to the campaign's progress ledger.
+- The dispatch-lessons file came out of a multi-agent audit-fix campaign on a Python repository in July 2026, run as a sequence of implementer agents. One ended its turn while a full test suite was still running in the background, leaving its work uncommitted. The human's directive: learn from agent limitations as they happen, so no later agent repeats them. The fix was a file next to the campaign's progress ledger, not a better message to that one agent: unlike the orchestrator's context, the file survives compaction, and it can be audited.
 - What went into it was mostly environment facts no agent could guess: the system interpreter was broken and a specific one had to be used, the shell's working directory reset between commands, git staging needed discipline, and commit signing could hang.
-- A mostly mechanical find-and-replace across 24 files ran in the foreground for about 30 minutes. A self-contained brief of about 30 lines (goal, exact files, exact rules, what to preserve, acceptance criteria) would have let it run in parallel.
+- The 24-file find-and-replace that a brief of about 30 lines could have sent off in parallel is told in [Parallel Agent Development](02-parallel-agent-development.md).
 - A check judged through a pipe reported success while the command was returning 1, which is why the brief asks for the exit code read directly. More cases in [when the verification evidence itself was wrong](../examples/field-story-verification-evidence-lied.md).
 
 ## Related workflows

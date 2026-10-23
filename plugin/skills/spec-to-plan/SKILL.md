@@ -1,6 +1,6 @@
 ---
 name: spec-to-plan
-description: "Use when the request is vague or multi-step. Turn a fuzzy idea into a spec, plan, and implementation checklist."
+description: "Use when the request is vague or multi-step. Drill a vague request into an approved spec, then a plan whose every task carries its own verification command, so nothing gets built on a guess."
 ---
 
 # Spec → Plan → Implementation

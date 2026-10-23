@@ -1,6 +1,6 @@
 ---
 name: agent-task-contract
-description: "Use before delegating a task to an AI agent. Give the agent a contract that prevents drive-by edits and unsupported success claims."
+description: "Use before delegating a task to an AI agent. Give the agent a brief it can execute alone: one outcome, a measured edit list, forbidden actions, earlier lessons, a done condition that is a command, and a report checkable on disk."
 ---
 
 # Agent Task Contract and Scope Box
@@ -71,12 +71,12 @@ Report:
 ## Failure modes
 
 - **Context the agent never had.** The brief leans on your conversation, so the agent fills the gaps with guesses.
-- **An inferred edit list.** In one sub-project the list was too narrow four separate times, each discovered only after the agents finished.
+- **An inferred edit list.** A list written from memory can come out too narrow, and the gap shows only after the agents finish. A case where that happened four times is in [Parallel Agent Development](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/02-parallel-agent-development.md).
 - **A silent scope box.** Nothing forbids git operations or builds in a shared checkout, so a well-meaning agent commits, stashes or rebuilds under other live sessions.
-- **Trusting the summary.** An agent reported success while silently skipping an entire assigned spec file. Only checking the files on disk caught it.
+- **Trusting the summary.** A success report can hide a skipped file; only the files on disk show it. The skipped spec file is told in [Parallel Agent Development](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/02-parallel-agent-development.md).
 - **Re-teaching by message.** A correction sent in chat helps one agent; the next agent repeats the mistake.
 - **Briefs from a stale plan.** A rename landed in code but not in the plan, so the next wave was briefed against a field that no longer existed.
-- **Ceremony on routine work.** Identical implement-then-review cycles on mechanical tasks added noise, not safety, and the human stopped them as too repetitive.
+- **Ceremony on routine work.** Identical implement-then-review cycles on mechanical tasks add noise, not safety. The loop the human stopped as too repetitive is told in [Fresh-Context Code Review](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/04-fresh-context-code-review.md).
 
 ## Human gate
 

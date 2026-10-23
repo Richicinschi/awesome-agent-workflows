@@ -1,6 +1,6 @@
 ---
 name: long-running-task-checkpoint
-description: "Use when a build, migration, scrape, benchmark, agent run, or batch job will run for a while. Track progress, logs, exit conditions, and recovery without losing the process."
+description: "Use when a build, migration, scrape, benchmark, agent run, or batch job will run for a while. Run long jobs where the agent session cannot kill them, with logs that outlive it, a heartbeat, a clean stop and evidence of what was produced."
 ---
 
 # Long-Running Task Checkpoint
@@ -33,7 +33,7 @@ Report:
 - Job name, and the command that shows its logs
 - Expected output, and the command that counts it
 - Last heartbeat time and current counts
-- How a stop will be judged clean (exit codes)
+- How a stop will be judged clean (exit codes, and for 143 the shutdown handler's flush line)
 ```
 
 ## Steps
@@ -45,7 +45,7 @@ Report:
 5. **Log progress as periodic lines.** Turn off output buffering, or the log shows nothing until a flush. Print one line every N units, for example `[####....] 41% | 407/987 | OK 309 | ETA 1h 22m`. A redrawing progress bar turns a log stream into thousands of fragments.
 6. **Emit a heartbeat whose absence is the alarm.** An empty log looks the same whether the job is healthy, stuck in a retry loop or dead. Print a heartbeat with current counts at a fixed interval, and treat a missing one as a failure.
 7. **Check progress by counting outputs, not by status.** A container listed as "Up" can be reading an empty directory. Look inside the job's own view of the filesystem and count files, rows and modification times. Better still, give the job a status tool that reads those counts and exits non-zero when they stall.
-8. **Stop it cleanly and read the exit codes.** A stop command printing "Stopped" means the process is no longer running, not that it shut down cleanly. Exit code 0 or 143 is clean; 137 is a kill. If a comment says the job flushes on shutdown, search the code for the signal handler before believing it. Publish outputs atomically, so a kill leaves no half-written files.
+8. **Stop it cleanly and read the exit codes.** A stop command printing "Stopped" means the process is no longer running, not that it shut down cleanly. Exit code 0 is clean. 137 is a kill. 143 means SIGTERM ended it, which is clean only if a shutdown handler ran; look for its flush line in the log. If a comment says the job flushes on shutdown, search the code for the signal handler before believing it. Publish outputs atomically, so a kill leaves no half-written files.
 9. **Verify the result by what it contains.** Compare output counts with the expected numbers or the previous run, and treat any drop as a failure until it is explained. A tool's own "verified" usually checks the integrity of what it stored, not whether it stored the right things. End wrapper scripts with an explicit success exit when they call native tools that use non-zero codes for success.
 
 ## Verification checklist
@@ -55,7 +55,7 @@ Report:
 - [ ] Output counts were taken inside the job's own filesystem view and match the expected numbers or the previous run.
 - [ ] No data lives only inside the container. Removing the container and its volumes would delete nothing irreplaceable.
 - [ ] CPU and memory limits are set.
-- [ ] After any stop, the exit codes are recorded: 0 or 143 clean, 137 investigated.
+- [ ] After any stop, the exit codes are recorded: 0 clean, 143 clean only if the shutdown handler's flush line is in the log, 137 investigated.
 - [ ] The final result is compared against a previous run or baseline, and any drop is explained.
 
 ## Failure modes
@@ -73,4 +73,4 @@ Report:
 
 ## Human gate
 
-Ask before killing or restarting a job you did not start, retrying expensive work, deleting volumes or outputs, putting heavy compute on a machine that runs always-on services, or changing external state.
+Ask before killing or restarting a job you did not start, retrying expensive work, deleting volumes or outputs, putting heavy compute on a machine shared with other services, or changing external state.

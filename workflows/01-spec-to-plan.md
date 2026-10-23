@@ -88,8 +88,7 @@ No implementation until the human gives an explicit yes on the restated spec, an
 ## Field notes
 
 - The studio's drilling procedure combines two public, MIT-licensed agent skills: `interview-me` (from addyosmani/agent-skills: hypothesis plus confidence, restate and require a yes, the predict-the-next-three stop rule) and `grill-me` (from mattpocock/skills: resolve every branch, explore the code instead of speculating). It adds an adaptive one-question-at-a-time loop with commands such as `skip`, `coverage` and `draft`.
-- During an app's analytics rollout (May 2026), the owner interrupted a per-task loop of implementer, spec reviewer and quality reviewer as "too repetitive". The early, risky infrastructure tasks had benefited from review; the later mechanical instrumentation had not. The standing rule since: implement mechanical work directly and review once at the end.
-- In a multi-agent fix campaign on a Python repository (July 2026), one implementer stalled waiting on a background test run and left its work uncommitted. Sequential agents have no memory of each other, so the fix was a lessons file beside the plan that every later brief tells the agent to read first. A correction you had to send mid-task belongs in that file.
+- Two lessons that shaped this workflow are told in full elsewhere: the per-task review loop the owner stopped as "too repetitive", behind step 10, in [Fresh-Context Code Review](04-fresh-context-code-review.md); and the implementer that ended its turn while a background test run continued, which led to a lessons file every later brief reads first, in [Agent Task Contract and Scope Box](12-agent-task-contract.md).
 - A 24-section pre-development plan, from store submission to timeline, is referenced by section number rather than re-derived each time. Its pricing and policy claims are re-checked before being quoted, because a plan written months ago ages.
 
 ## Related workflows

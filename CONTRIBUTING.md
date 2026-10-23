@@ -16,7 +16,7 @@ Good PRs usually add one of these:
 
 Every workflow card carries a status line under its title, matching the `status` field in `agent-workflows.json`:
 
-- **draft**: still the generic template the early cards were generated from. The most useful contribution is turning one into a real card.
+- **draft**: still the generic template the early cards were generated from. Its `verification` sentence in `agent-workflows.json` is the target a rewrite must meet. The most useful contribution is turning one into a real card.
 - **candidate**: specific steps, failure modes and verification, reviewed, but not yet used on real work.
 - **field-tested**: used on a real project, with a `## Field notes` section saying what happened. Only claim this for practice you have actually run.
 

@@ -1,6 +1,6 @@
 ---
 name: agent-memory-hygiene-review
-description: "Use when memory feels wrong, stale, conflicting, too full, or privacy-sensitive. Deduplicate, expire, redact, and scope memories without losing useful preferences."
+description: "Use when memory feels wrong, stale, conflicting, too full, or privacy-sensitive. Keep agent memory small, true as of today and lossless: free space by archiving full text with a pointer left behind, never by deleting, and make corrections visible."
 ---
 
 # Agent Memory Hygiene Review

@@ -1,6 +1,6 @@
 ---
 name: ci-red-to-green
-description: "Use when CI fails after an agent change. Reproduce or explain CI failure before pushing fixes."
+description: "Use when CI fails after an agent change. Reproduce the failing item alone with its full output and real exit code, name the failed component, fix the cause and show counts matching the baseline."
 ---
 
 # CI Red-to-Green Reproducer
@@ -56,7 +56,7 @@ Output:
 4. **Take the exit code of the command itself.** Not the exit code of a pipe, and not the status of an `echo` that ran after it. Know which tools return non-zero on success, so a false red does not train you to ignore exit codes.
 5. **Name the component that failed before naming a cause.** Print the real exception and list the real names involved. If a test counts results before checking for an exception, a crash and an empty result look the same. A changelog entry that matches the symptom is only a hypothesis. Mark every cause MEASURED or INFERRED.
 6. **Fix the cause, not the check.** Do not skip the test, mark it flaky, raise the timeout, loosen a threshold or pin a dependency version on an inferred cause. Those need a human decision.
-7. **Verify on the tree that runs.** Confirm the fix in the checkout that actually executes, not only in the worktree or branch where you made it.
+7. **Verify on the tree that runs.** Confirm the fix in the checkout that actually executes, not only in the worktree or branch where you made it. A fix that passed in a worktree while the live checkout ran old code is told in [Git Worktree Agent Lanes](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/35-git-worktree-agent-lanes.md).
 8. **Read every step of a multi-step gate.** A gate whose first step prints "passed" and whose second step dies looks like a gate that ran. Static analysis passing does not mean the tests ran.
 9. **Compare counts against the baseline.** A drop in passes or a rise in skips is a failure until explained. Never record a baseline you have not seen printed yourself. Never change the baseline in a commit that does not also change the code that moved it.
 10. **If you changed the check itself, prove it can still go red.** Break a fixture on purpose, re-run, see red, restore. A check that cannot go red is decoration.

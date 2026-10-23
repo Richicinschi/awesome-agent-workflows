@@ -75,7 +75,7 @@ Output:
 - **Review of the summary.** The reviewer reads "all tests pass" and never runs the command.
 - **Self-review mistaken for review.** Checking that each sentence matches a table catches typos. It cannot catch a table that answers the wrong question.
 - **Ceremony on routine work.** A review after every mechanical task repeats itself and reads as noise, which buries the one review that matters.
-- **The wrong tree.** The fix is confirmed in a worktree while the main checkout keeps running the old code.
+- **The wrong tree.** A pass in a worktree says nothing about the checkout that runs. The case where that happened is told in [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md).
 - **Unproven findings.** The reviewer reports a bug it never reproduced, and the author wastes a cycle disproving it.
 - **Unchecked corrections.** The fix for a finding introduces a new error that nobody reviews.
 
@@ -87,7 +87,7 @@ The human reads the verdict and the findings, not the author's summary, and deci
 
 - A findings document from a data study passed its author's own sentence-by-sentence check, because every sentence did match a table. An independent reviewer handed only the raw event files found four problems the tables could not show. A reason had been written beside a number as if it had been measured too. One clause of a two-clause decision rule was true by construction. A split had groups defined by what happened later. A cut chosen after looking reversed when the data was sorted another way. The rule that came out of it: self-review checks that sentences match tables, a reviewer finds what the tables could not show.
 - On another findings document from the same kind of study, re-deriving every sentence from the stored data found one wrong number and five statements stronger than their tables. The correction pass then wrote a new false sentence. It was caught only because the corrected sentences were checked as well.
-- Running the full implementer, spec-reviewer and quality-reviewer loop on every task of a mechanical change got stopped by the owner after several near-identical rounds. The early, risky infrastructure tasks had benefited from review; the later routine ones had not. The default became: implement directly, then one review at the end.
+- During an app's analytics rollout in May 2026, a full implementer, spec-reviewer and quality-reviewer loop ran on every task. After several near-identical rounds the owner stopped it as "too repetitive". The early, risky infrastructure tasks had benefited from review; the later mechanical instrumentation had not. The default became: implement mechanical work directly, then one review at the end.
 - The studio's reviewer agent is read-only. It is told to assume a bug until it has proven otherwise, to cite file:line, and to end with APPROVE or CHANGES REQUESTED.
 - Related reading: [Eight ways a green test suite proved nothing](../examples/field-story-tests-that-cannot-fail.md) (every one caught by review or mutation, none by the suite) and an illustrative [worked example of a fresh-context review](../examples/fresh-context-review-catches-unverified-pr.md).
 

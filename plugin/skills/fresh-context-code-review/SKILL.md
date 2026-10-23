@@ -1,6 +1,6 @@
 ---
 name: fresh-context-code-review
-description: "Use before merging or trusting agent-authored code. Review without author-context contamination."
+description: "Use before merging or trusting agent-authored code. Get one independent review from a reviewer that never saw the author's reasoning, re-runs the evidence itself and ends with file:line findings and a verdict."
 ---
 
 # Fresh-Context Code Review
@@ -76,7 +76,7 @@ Output:
 - **Review of the summary.** The reviewer reads "all tests pass" and never runs the command.
 - **Self-review mistaken for review.** Checking that each sentence matches a table catches typos. It cannot catch a table that answers the wrong question.
 - **Ceremony on routine work.** A review after every mechanical task repeats itself and reads as noise, which buries the one review that matters.
-- **The wrong tree.** The fix is confirmed in a worktree while the main checkout keeps running the old code.
+- **The wrong tree.** A pass in a worktree says nothing about the checkout that runs. The case where that happened is told in [Git Worktree Agent Lanes](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/35-git-worktree-agent-lanes.md).
 - **Unproven findings.** The reviewer reports a bug it never reproduced, and the author wastes a cycle disproving it.
 - **Unchecked corrections.** The fix for a finding introduces a new error that nobody reviews.
 

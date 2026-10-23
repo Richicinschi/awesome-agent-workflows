@@ -1,6 +1,6 @@
 ---
 name: repo-growth-launch
-description: "Use when a public repository needs useful packaging and launch readiness. Make a repo discoverable without fake engagement or spam."
+description: "Use when a public repository needs useful packaging and launch readiness. Launch a public repo honestly: content that survives a click-through, one rule-following submission per venue, fast replies to contributors, and every public action by the maintainer."
 ---
 
 # Repo Growth Launch
@@ -53,7 +53,7 @@ Output:
 5. **Write one tailored submission per venue.** Use the venue's format and disclosure. Include the repo link once and ask a specific question. Never mass-post the same text.
 6. **Make the contribution path real and answer fast.** Label small, concrete issues "good first issue"; that is where outside contributors start. Reply within days, not months. Slow review is a cost paid by the people who showed up.
 7. **Hold inbound links to your own curation policy.** A link to a storefront with no operational content gets declined, politely, with a constructive alternative such as contributing a worked example. Cite the [curation policy](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/docs/curation-policy.md) and do not name or shame anyone.
-8. **Thank contributors by handle in the release notes.** A mention notifies them, and they tend to share the release.
+8. **Thank contributors by handle in the release notes.** A mention by handle notifies each contributor.
 9. **Hand every public action to the human, one venue at a time.** The agent prepares drafts and checklists. The maintainer posts, submits forms, opens list PRs and replies. Posting in one place at a time keeps replies answerable.
 10. **Log what happens and watch the stop conditions.** For each post, record venue, link, whether it stayed up, replies and issues opened. Slow down if posts are removed, replies show the pitch is unclear, or replies cannot be handled promptly.
 

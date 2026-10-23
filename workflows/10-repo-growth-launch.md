@@ -52,7 +52,7 @@ Output:
 5. **Write one tailored submission per venue.** Use the venue's format and disclosure. Include the repo link once and ask a specific question. Never mass-post the same text.
 6. **Make the contribution path real and answer fast.** Label small, concrete issues "good first issue"; that is where outside contributors start. Reply within days, not months. Slow review is a cost paid by the people who showed up.
 7. **Hold inbound links to your own curation policy.** A link to a storefront with no operational content gets declined, politely, with a constructive alternative such as contributing a worked example. Cite the [curation policy](../docs/curation-policy.md) and do not name or shame anyone.
-8. **Thank contributors by handle in the release notes.** A mention notifies them, and they tend to share the release.
+8. **Thank contributors by handle in the release notes.** A mention by handle notifies each contributor.
 9. **Hand every public action to the human, one venue at a time.** The agent prepares drafts and checklists. The maintainer posts, submits forms, opens list PRs and replies. Posting in one place at a time keeps replies answerable.
 10. **Log what happens and watch the stop conditions.** For each post, record venue, link, whether it stayed up, replies and issues opened. Slow down if posts are removed, replies show the pitch is unclear, or replies cannot be handled promptly.
 
@@ -85,8 +85,8 @@ Every public action belongs to the maintainer: posts, comments, PRs to curated l
 ## Field notes
 
 - This repository was generated in about an hour, after a search of GitHub for topics with high star ceilings. Its launch plan and post copy were written but never posted. Four months later it had 0 stars and 0 views in 14 days. Promotion, not polish, was the bottleneck.
-- Outside contributors still arrived, all through issues labelled "good first issue", and their PRs targeted exactly those issues. Reviewing them took months, and that delay was a real cost.
-- An audit before promotion found that 30 of the 40 workflow cards shared word-for-word identical bodies. This card was rewritten from the repo's real launch as part of fixing that.
+- Even so, every useful outside contribution arrived through issues labelled "good first issue", and those PRs targeted exactly those issues. Reviewing them took months, and that delay was a real cost.
+- An audit before promotion found that all 40 original workflow cards came from two templates: 30 shared one body word for word, the other 10 another. This card was rewritten from the repo's real launch as part of fixing that.
 - One vendor account posted the same resource link to more than ten curated lists, this one included. It was declined under the curation policy (a storefront with no operational content), with a constructive alternative offered.
 - The outcome of this launch is not yet known. Nothing on this card claims a result.
 

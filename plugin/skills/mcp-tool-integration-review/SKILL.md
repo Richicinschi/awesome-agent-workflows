@@ -1,6 +1,6 @@
 ---
 name: mcp-tool-integration-review
-description: "Use when adding or changing an MCP server, tool, plugin, or external integration. Review permissions, data flow, failure modes, and least-privilege configuration."
+description: "Use when adding or changing an MCP server, tool, plugin, or external integration. Let nothing reach an agent until it passes a security scan, a human has read what it can execute and reach, and it fills a real gap; adopt only the smallest safe part."
 ---
 
 # MCP and Tool Integration Review

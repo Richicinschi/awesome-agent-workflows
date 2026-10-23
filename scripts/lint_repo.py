@@ -45,7 +45,7 @@ def check_required_files() -> None:
 
 
 def check_catalog() -> None:
-    data = json.loads((ROOT / "agent-workflows.json").read_text())
+    data = json.loads((ROOT / "agent-workflows.json").read_text(encoding="utf-8"))
     if len(data) < 10:
         fail("expected at least 10 workflows in agent-workflows.json")
     ids = [item["id"] for item in data]
@@ -61,12 +61,12 @@ def check_catalog() -> None:
 
 
 def check_status() -> None:
-    data = json.loads((ROOT / "agent-workflows.json").read_text())
+    data = json.loads((ROOT / "agent-workflows.json").read_text(encoding="utf-8"))
     for item in data:
         status = item.get("status")
         if status not in STATUSES:
             fail(f"{item['id']}: status must be one of {STATUSES}, got {status!r}")
-        text = (ROOT / item["path"]).read_text(errors="replace")
+        text = (ROOT / item["path"]).read_text(encoding="utf-8", errors="replace")
         match = STATUS_LINE.search(text)
         if not match or match.group(1) != status:
             fail(f"{item['path']}: status line must say {status!r} to match agent-workflows.json")
@@ -82,7 +82,7 @@ def check_placeholders() -> None:
     allow_angle_templates = {"templates/agent-brief.md", "templates/workflow-card.md"}
     for path in ROOT.rglob("*.md"):
         rel = path.relative_to(ROOT).as_posix()
-        text = path.read_text(errors="replace")
+        text = path.read_text(encoding="utf-8", errors="replace")
         for marker in PLACEHOLDERS:
             if marker in text:
                 fail(f"placeholder marker {marker!r} found in {rel}")
@@ -92,7 +92,7 @@ def check_placeholders() -> None:
 
 def check_local_links() -> None:
     for path in ROOT.rglob("*.md"):
-        text = path.read_text(errors="replace")
+        text = path.read_text(encoding="utf-8", errors="replace")
         for raw in LOCAL_LINK.findall(text):
             target = raw.split("#", 1)[0].strip()
             if not target:

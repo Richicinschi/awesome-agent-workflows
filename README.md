@@ -85,7 +85,7 @@ The library has **41 workflow cards**. Start with the field-tested ones:
 - [Research Brief](workflows/08-research-brief.md): design the search so it can find what would prove you wrong.
 - [Repo Growth Launch](workflows/10-repo-growth-launch.md): launch a public repo honestly, written from this repo's own launch.
 
-The other cards, with their status, are in the [catalog](docs/WORKFLOW-CATALOG.md). For machine-readable metadata, including each card's status and verification evidence, see [`agent-workflows.json`](agent-workflows.json).
+The other cards, with their status, are in the [catalog](docs/WORKFLOW-CATALOG.md). For machine-readable metadata, including each card's status and the evidence that proves it worked (for drafts, the target a rewrite must meet), see [`agent-workflows.json`](agent-workflows.json).
 
 ## Tool adapters
 

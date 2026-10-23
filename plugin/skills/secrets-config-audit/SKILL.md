@@ -1,6 +1,6 @@
 ---
 name: secrets-config-audit
-description: "Use before public release, CI setup, deployment, or repository handoff. Find exposed secrets, unsafe defaults, config drift, and docs that request secrets insecurely."
+description: "Use before public release, CI setup, deployment, or repository handoff. Before a public push, prove the repo and its whole history carry no secrets, network details, personal data or process traces, and escalate what cannot be removed."
 ---
 
 # Secrets and Config Audit
@@ -44,7 +44,7 @@ Required output:
 1. **Write down what the product needs.** List what belongs in the repo: source, assets, build and deploy config, licence, user docs. Everything else has to justify itself. Agent instruction files, specs and plans, audit reports, session notes and memory files are process traces; they stay on your machine.
 2. **Find the secrets in the tree.** Look for env files, key files, tokens in config, and secrets pasted into docs or examples. Keys stay server-side: never in frontend code, fixtures or committed files. Ship an example env file with variable names and no values.
 3. **Check encodings before trusting a clean search.** An env file saved as UTF-16 puts a null byte after every ASCII character, so a plain text search for a key pattern can miss it, and a naive env loader mangles it. Detect the encoding and decode before you scan.
-4. **Scan the full history, not the working tree.** Deleting a file in a later commit leaves it in every earlier one. Search all refs, for example `git grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}' $(git rev-list --all)` for IPv4, and the same form for IPv6, key patterns, hostnames, home paths and emails. A dedicated secret scanner over the history makes a good second pass.
+4. **Scan the full history, not the working tree.** Deleting a file in a later commit leaves it in every earlier one. Search all refs, for example `git rev-list --all | xargs git grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'` for IPv4 (piping through `xargs` keeps a big history from overflowing the command line, on Windows too), and the same form for IPv6, key patterns, hostnames, home paths and emails. A dedicated secret scanner over the history makes a good second pass.
 5. **Hunt network details, comments included.** IP addresses, VPN exit addresses, LAN ranges, router layout and machine hostnames do not belong in any commit: not in config comments, debug notes, logs or commit messages. Describe the finding in words instead ("the direct connection reaches the host; the VPN exit is refused"). Fixtures that need an address use the documentation ranges 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24 and 2001:db8::/32. Tools that record which machine ran something write a label, not a hostname.
 6. **Check captured documents.** Saved web pages can print the fetching client's address inside their scripts, and PDFs can carry "downloaded by" stamps. Scan archived pages for dotted quads and remote-address keys, and extract PDF text before committing the file.
 7. **Strip personal data and process traces.** Search for names, emails other than the git author's, usernames and home-directory paths. Read commit messages and trailers too: co-author and session trailers are process traces. Keep local-only files out with `.git/info/exclude` when even the ignore list should not reveal what they are.

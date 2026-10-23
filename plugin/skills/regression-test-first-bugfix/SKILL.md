@@ -1,6 +1,6 @@
 ---
 name: regression-test-first-bugfix
-description: "Use when a bug has a concrete symptom or user report. Capture the bug as a failing test before changing production code."
+description: "Use when a bug has a concrete symptom or user report. Capture the bug as a test that goes red on the exact symptom, green after the fix and red again when the fix is removed, with the cause marked measured or inferred."
 ---
 
 # Regression-Test-First Bug Fix
