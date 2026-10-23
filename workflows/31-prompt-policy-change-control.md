@@ -1,5 +1,7 @@
 # Prompt and Policy Change Control
 
+> **Status: draft.** This card still uses the generic template shared by the early cards and has not been field-tested yet. Help make it real: see [CONTRIBUTING](../CONTRIBUTING.md).
+
 ## Trigger
 
 Changing system prompts, guardrails, tool permissions, routing, or memory policy.

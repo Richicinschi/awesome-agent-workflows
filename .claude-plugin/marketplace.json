@@ -1,0 +1,17 @@
+{
+  "name": "awesome-agent-workflows",
+  "description": "Field-tested workflows for coding agents, packaged as skills",
+  "owner": {
+    "name": "Richicinschi",
+    "url": "https://github.com/Richicinschi"
+  },
+  "plugins": [
+    {
+      "name": "agent-workflows",
+      "source": "./plugin",
+      "description": "Field-tested and candidate workflow cards as skills: parallel agents, worktree lanes, task contracts, fresh-context review, regression-test-first fixes, CI red-to-green, handoffs and more.",
+      "category": "development",
+      "tags": ["workflows", "verification", "parallel-agents", "code-review", "testing"]
+    }
+  ]
+}

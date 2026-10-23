@@ -49,7 +49,7 @@ Pick one main public launch venue first. Avoid posting everywhere at once; it is
 
 Recommended first public venue:
 
-1. Show HN if the post can be framed as lessons learned and practical value.
+1. Hacker News: a normal link to the strongest field story, or Show HN only when leading with something people can try (the skills plugin). Show HN rules exclude reading material and lists.
 2. X or Bluesky thread if the account has agent-builder followers.
 3. Reddit only where project posts are allowed and the framing is community-specific.
 4. LinkedIn or Mastodon for team/process audience.
@@ -123,6 +123,6 @@ During the first 48 hours:
 
 1. Private/close network feedback request.
 2. One X/Bluesky thread or LinkedIn/Mastodon post.
-3. Show HN when ready to monitor comments for several hours.
+3. Hacker News (normal link, or Show HN for the plugin) when ready to monitor comments for several hours.
 4. One relevant Reddit community, adapted to that community.
 5. Second-wave example post using a specific workflow story.

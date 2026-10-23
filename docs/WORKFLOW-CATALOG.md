@@ -12,87 +12,87 @@ This catalog helps you choose the right workflow before handing real work to an 
 - Prompt, policy, or memory changes: `31` and `32`.
 ## Workflows by category
 ### Planning
-- [`01` Spec → Plan → Implementation](../workflows/01-spec-to-plan.md) — The request is vague or multi-step.
-- [`11` Change Impact Map](../workflows/11-change-impact-map.md) — Before an agent edits unfamiliar code or a risky area.
-- [`12` Agent Task Contract and Scope Box](../workflows/12-agent-task-contract.md) — Before delegating a task to an AI agent.
+- [`01` Spec → Plan → Implementation](../workflows/01-spec-to-plan.md) — The request is vague or multi-step. · **field-tested**
+- [`11` Change Impact Map](../workflows/11-change-impact-map.md) — Before an agent edits unfamiliar code or a risky area. · *draft*
+- [`12` Agent Task Contract and Scope Box](../workflows/12-agent-task-contract.md) — Before delegating a task to an AI agent. · **field-tested**
 
 ### Execution
-- [`02` Parallel Agent Development](../workflows/02-parallel-agent-development.md) — Multiple independent tasks can run at once.
-- [`35` Git Worktree Agent Lanes](../workflows/35-git-worktree-agent-lanes.md) — Multiple agents or humans need to work in the same repo concurrently.
-- [`36` Context Compaction and Handoff](../workflows/36-context-compaction-handoff.md) — A long agent session is about to compact, hand off, or restart.
-- [`40` Long-Running Task Checkpoint](../workflows/40-long-running-task-checkpoint.md) — A build, migration, scrape, benchmark, agent run, or batch job will run for a while.
+- [`02` Parallel Agent Development](../workflows/02-parallel-agent-development.md) — Multiple independent tasks can run at once. · **field-tested**
+- [`35` Git Worktree Agent Lanes](../workflows/35-git-worktree-agent-lanes.md) — Multiple agents or humans need to work in the same repo concurrently. · **field-tested**
+- [`36` Context Compaction and Handoff](../workflows/36-context-compaction-handoff.md) — A long agent session is about to compact, hand off, or restart. · **field-tested**
+- [`40` Long-Running Task Checkpoint](../workflows/40-long-running-task-checkpoint.md) — A build, migration, scrape, benchmark, agent run, or batch job will run for a while. · **field-tested**
 
 ### Implementation
-- [`18` API Contract Change Lockstep](../workflows/18-api-contract-lockstep.md) — Changing public APIs, schemas, events, CLI flags, or config formats.
-- [`34` Multi-Repo Change Coordinator](../workflows/34-multi-repo-change-coordinator.md) — A change spans multiple repositories, packages, services, docs, or deployment units.
+- [`18` API Contract Change Lockstep](../workflows/18-api-contract-lockstep.md) — Changing public APIs, schemas, events, CLI flags, or config formats. · *draft*
+- [`34` Multi-Repo Change Coordinator](../workflows/34-multi-repo-change-coordinator.md) — A change spans multiple repositories, packages, services, docs, or deployment units. · *draft*
 
 ### Debugging
-- [`03` Root-Cause Debugging](../workflows/03-bug-root-cause.md) — A bug is unclear or recurring.
-- [`13` Regression-Test-First Bug Fix](../workflows/13-regression-test-first-bugfix.md) — A bug has a concrete symptom or user report.
-- [`14` Minimized Reproducer Factory](../workflows/14-minimized-reproducer-factory.md) — A bug is vague, flaky, environment-specific, or reported only in logs.
+- [`03` Root-Cause Debugging](../workflows/03-bug-root-cause.md) — A bug is unclear or recurring. · *draft*
+- [`13` Regression-Test-First Bug Fix](../workflows/13-regression-test-first-bugfix.md) — A bug has a concrete symptom or user report. · **field-tested**
+- [`14` Minimized Reproducer Factory](../workflows/14-minimized-reproducer-factory.md) — A bug is vague, flaky, environment-specific, or reported only in logs. · *draft*
 
 ### Testing
-- [`20` Flaky Test Burn-Down](../workflows/20-flaky-test-burndown.md) — A test passes on rerun but fails intermittently.
+- [`20` Flaky Test Burn-Down](../workflows/20-flaky-test-burndown.md) — A test passes on rerun but fails intermittently. · *draft*
 
 ### CI
-- [`19` CI Red-to-Green Reproducer](../workflows/19-ci-red-to-green.md) — CI fails after an agent change.
+- [`19` CI Red-to-Green Reproducer](../workflows/19-ci-red-to-green.md) — CI fails after an agent change. · **field-tested**
 
 ### Review
-- [`04` Fresh-Context Code Review](../workflows/04-fresh-context-code-review.md) — Before merging or trusting agent-authored code.
-- [`16` Agent Patch Intake Triage](../workflows/16-patch-intake-triage.md) — An agent returns a diff, branch, patch, or pull request.
-- [`17` Review Feedback Application Loop](../workflows/17-review-feedback-loop.md) — A reviewer left comments on an agent-authored PR.
-- [`41` Agent-Generated Test Review](../workflows/41-agent-generated-test-review.md) — An agent added tests and coverage quality needs review.
+- [`04` Fresh-Context Code Review](../workflows/04-fresh-context-code-review.md) — Before merging or trusting agent-authored code. · **field-tested**
+- [`16` Agent Patch Intake Triage](../workflows/16-patch-intake-triage.md) — An agent returns a diff, branch, patch, or pull request. · *draft*
+- [`17` Review Feedback Application Loop](../workflows/17-review-feedback-loop.md) — A reviewer left comments on an agent-authored PR. · *draft*
+- [`41` Agent-Generated Test Review](../workflows/41-agent-generated-test-review.md) — An agent added tests and coverage quality needs review. · *candidate*
 
 ### Refactoring
-- [`15` Golden Master Refactor](../workflows/15-golden-master-refactor.md) — Refactoring legacy or under-tested code where behavior must stay stable.
+- [`15` Golden Master Refactor](../workflows/15-golden-master-refactor.md) — Refactoring legacy or under-tested code where behavior must stay stable. · *draft*
 
 ### Security
-- [`05` Security Review Sprint](../workflows/05-security-review.md) — Code touches auth, secrets, network, parsers, permissions, or public release.
-- [`38` Secrets and Config Audit](../workflows/38-secrets-config-audit.md) — Before public release, CI setup, deployment, or repository handoff.
+- [`05` Security Review Sprint](../workflows/05-security-review.md) — Code touches auth, secrets, network, parsers, permissions, or public release. · *draft*
+- [`38` Secrets and Config Audit](../workflows/38-secrets-config-audit.md) — Before public release, CI setup, deployment, or repository handoff. · **field-tested**
 
 ### Safety
-- [`32` Agent Memory Hygiene Review](../workflows/32-agent-memory-hygiene-review.md) — Memory feels wrong, stale, conflicting, too full, or privacy-sensitive.
-- [`37` MCP and Tool Integration Review](../workflows/37-mcp-tool-integration-review.md) — Adding or changing an MCP server, tool, plugin, or external integration.
+- [`32` Agent Memory Hygiene Review](../workflows/32-agent-memory-hygiene-review.md) — Memory feels wrong, stale, conflicting, too full, or privacy-sensitive. · **field-tested**
+- [`37` MCP and Tool Integration Review](../workflows/37-mcp-tool-integration-review.md) — Adding or changing an MCP server, tool, plugin, or external integration. · **field-tested**
 
 ### Release
-- [`07` Release Runbook](../workflows/07-release-runbook.md) — A change is ready to publish, deploy, or announce.
-- [`22` Urgent Hotfix Fast Path](../workflows/22-urgent-hotfix-fast-path.md) — A production-impacting regression needs a fast patch.
-- [`25` Migration Readiness and Cutover Planner](../workflows/25-migration-cutover-planner.md) — A schema, API, platform, vendor, or data migration is proposed.
+- [`07` Release Runbook](../workflows/07-release-runbook.md) — A change is ready to publish, deploy, or announce. · *draft*
+- [`22` Urgent Hotfix Fast Path](../workflows/22-urgent-hotfix-fast-path.md) — A production-impacting regression needs a fast patch. · *draft*
+- [`25` Migration Readiness and Cutover Planner](../workflows/25-migration-cutover-planner.md) — A schema, API, platform, vendor, or data migration is proposed. · *draft*
 
 ### Operations
-- [`23` Incident Command Center](../workflows/23-incident-command-center.md) — A pager alert, customer-impacting incident, or severe degradation is active.
-- [`24` Blameless Postmortem and Action Ledger](../workflows/24-blameless-postmortem-ledger.md) — An incident is stabilized or closed.
+- [`23` Incident Command Center](../workflows/23-incident-command-center.md) — A pager alert, customer-impacting incident, or severe degradation is active. · *draft*
+- [`24` Blameless Postmortem and Action Ledger](../workflows/24-blameless-postmortem-ledger.md) — An incident is stabilized or closed. · *draft*
 
 ### Documentation
-- [`26` Documentation Drift Audit](../workflows/26-documentation-drift-audit.md) — Docs may be stale after feature, process, or dependency changes.
-- [`27` ADR Decision Capture from Threads](../workflows/27-adr-decision-capture.md) — A decision happened in chat, meeting notes, issue comments, or PR discussion.
-- [`39` Agent-Written Docs Review](../workflows/39-agent-written-docs-review.md) — An agent produced README, API docs, changelog, tutorial, or launch copy.
+- [`26` Documentation Drift Audit](../workflows/26-documentation-drift-audit.md) — Docs may be stale after feature, process, or dependency changes. · *draft*
+- [`27` ADR Decision Capture from Threads](../workflows/27-adr-decision-capture.md) — A decision happened in chat, meeting notes, issue comments, or PR discussion. · *draft*
+- [`39` Agent-Written Docs Review](../workflows/39-agent-written-docs-review.md) — An agent produced README, API docs, changelog, tutorial, or launch copy. · *draft*
 
 ### Team
-- [`28` Role-Based Onboarding Trail](../workflows/28-role-based-onboarding-trail.md) — A new hire, transfer, contractor, or agent needs to ramp into a repo or system.
-- [`29` Knowledge Transfer and Bus-Factor Reduction](../workflows/29-bus-factor-reduction.md) — A system depends on one person, a rotation is coming, or ownership is changing.
+- [`28` Role-Based Onboarding Trail](../workflows/28-role-based-onboarding-trail.md) — A new hire, transfer, contractor, or agent needs to ramp into a repo or system. · *draft*
+- [`29` Knowledge Transfer and Bus-Factor Reduction](../workflows/29-bus-factor-reduction.md) — A system depends on one person, a rotation is coming, or ownership is changing. · *draft*
 
 ### Evaluation
-- [`30` Workflow Evaluation Harness](../workflows/30-workflow-evaluation-harness.md) — A new agent workflow, prompt, or automation needs repeatable quality checks.
-- [`31` Prompt and Policy Change Control](../workflows/31-prompt-policy-change-control.md) — Changing system prompts, guardrails, tool permissions, routing, or memory policy.
+- [`30` Workflow Evaluation Harness](../workflows/30-workflow-evaluation-harness.md) — A new agent workflow, prompt, or automation needs repeatable quality checks. · *draft*
+- [`31` Prompt and Policy Change Control](../workflows/31-prompt-policy-change-control.md) — Changing system prompts, guardrails, tool permissions, routing, or memory policy. · *draft*
 
 ### Product
-- [`33` Customer Signal to Roadmap Triage](../workflows/33-customer-signal-roadmap-triage.md) — Support tickets, interviews, reviews, sales notes, or churn reasons accumulate.
+- [`33` Customer Signal to Roadmap Triage](../workflows/33-customer-signal-roadmap-triage.md) — Support tickets, interviews, reviews, sales notes, or churn reasons accumulate. · *draft*
 
 ### Research
-- [`08` Research Brief](../workflows/08-research-brief.md) — A decision depends on current facts or external sources.
+- [`08` Research Brief](../workflows/08-research-brief.md) — A decision depends on current facts or external sources. · **field-tested**
 
 ### Infrastructure
-- [`09` Local AI Stack Setup](../workflows/09-local-ai-stack.md) — A local or self-hosted AI stack is needed.
+- [`09` Local AI Stack Setup](../workflows/09-local-ai-stack.md) — A local or self-hosted AI stack is needed. · *draft*
 
 ### Maintenance
-- [`21` Dependency Upgrade Shepherd](../workflows/21-dependency-upgrade-shepherd.md) — Bumping libraries, frameworks, runtimes, lockfiles, or build tools.
+- [`21` Dependency Upgrade Shepherd](../workflows/21-dependency-upgrade-shepherd.md) — Bumping libraries, frameworks, runtimes, lockfiles, or build tools. · *draft*
 
 ### Growth
-- [`10` Repo Growth Launch](../workflows/10-repo-growth-launch.md) — A public repository needs useful packaging and launch readiness.
+- [`10` Repo Growth Launch](../workflows/10-repo-growth-launch.md) — A public repository needs useful packaging and launch readiness. · **field-tested**
 
 ### QA
-- [`06` Browser Runtime QA](../workflows/06-browser-qa.md) — A browser app, page, or automation flow needs validation.
+- [`06` Browser Runtime QA](../workflows/06-browser-qa.md) — A browser app, page, or automation flow needs validation. · *draft*
 
 ## Risk levels
 

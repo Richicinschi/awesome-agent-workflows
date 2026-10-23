@@ -1,71 +1,105 @@
 # CI Red-to-Green Reproducer
 
+> **Status: field-tested.** Distilled from running up to ten coding-agent sessions at once in a one-person studio (2026), where hosted CI was retired and a local verify script plus a health probe across about two dozen repositories do the checking.
+
 ## Trigger
 
-CI fails after an agent change.
+A check went red after a change: hosted CI, a local verify script or a health probe. You need to know what actually failed before you push another fix. Use it as well when a check turns green after a fix and you need to know that the green is real.
 
 ## Goal
 
-Reproduce or explain CI failure before pushing fixes.
+Reproduce the failing item alone, with its full output and its real exit code. Name the component that failed, with evidence, and mark the cause as measured or inferred. Fix that cause, then show the check green with pass, skip and fail counts that match the baseline.
 
 ## Agent brief
 
 ```text
-You are executing the "CI Red-to-Green Reproducer" workflow.
+A check is red. Find out what actually failed before changing anything.
 
 Context:
-- Repo/system: [name and path]
-- User goal: [goal]
-- Current state: [branch, issue, incident, test failure, or source material]
-- Allowed scope: [files, commands, services]
-- Forbidden scope: [secrets, production, unrelated files, destructive actions]
+- Failing check: [job name, script, or probe line]
+- Raw log: [full log file or link, not a summary]
+- Last known green: [commit and its pass, skip and fail counts]
+- Exact command the check runs: [command, working directory, env]
+- Allowed scope: [files and commands]
+- Forbidden: [skipping or deleting tests, marking tests flaky,
+  loosening thresholds or timeouts, pinning a version as the fix,
+  editing the baseline, pushing just to let CI try again]
 
-Required output:
-- Scope summary
-- Actions taken
-- Evidence collected
-- Files changed
-- Verification commands and results
-- Open risks and decisions needed
+Do:
+1. Read the raw log from the first error. Decide whether the job ran
+   at all. Quota, billing, runner and spawn errors are not code
+   failures.
+2. Re-run only the failing item, alone, with the check's exact command.
+   Capture stdout, stderr and the exit code of that command itself.
+   No pipes.
+3. Name the component that failed. Print the real exception and the
+   real names involved. A plausible story or a matching changelog
+   entry is a hypothesis, not a cause.
+4. Fix the cause. Re-run the item alone, then the whole check, on the
+   checkout that actually runs the code.
+5. Compare pass, skip and fail counts with the last green run.
+
+Output:
+- Did the job run: yes or no, with the log line that shows it
+- Reproduction command, exit code and the key output lines
+- Cause, marked MEASURED (with evidence) or INFERRED
+- Fix and files changed
+- Counts before and after, against the baseline
 ```
 
 ## Steps
 
-1. **Restate the contract.** Say what will be changed, what will not be changed, and what evidence is required.
-2. **Collect targeted context.** Read only the files, logs, docs, issues, or commands needed for this workflow.
-3. **List assumptions.** Mark each assumption as verified, unverified, or requiring human input.
-4. **Execute the smallest safe increment.** Prefer a small patch, checklist, doc update, or diagnostic over broad rewrites.
-5. **Record evidence inline.** Keep command names, exit codes, links, screenshots, or source paths with every claim.
-6. **Run workflow-specific verification.** Use the checklist below before reporting success.
-7. **Leave a handoff.** Include next actions, stop conditions, and what should not be trusted without re-checking.
+1. **First ask whether the check ran at all.** Some reds have nothing to do with the code: a job that never started because an account hit its spending limit, a runner that refused to spawn the process, a probe run from a copy of the repo where the projects are missing. Read from the first error, not the last line.
+2. **Get the whole raw log.** Capture both stdout and stderr, because some tools print their summary to stderr. Do not add verbosity flags on top of the project's own config. A second quiet flag can delete the summary line.
+3. **Re-run the single failing item alone.** Use the check's exact command, working directory, environment and flags. A timeout during a busy full run may be machine load. Run the item by itself before calling it a regression.
+4. **Take the exit code of the command itself.** Not the exit code of a pipe, and not the status of an `echo` that ran after it. Know which tools return non-zero on success, so a false red does not train you to ignore exit codes.
+5. **Name the component that failed before naming a cause.** Print the real exception and list the real names involved. If a test counts results before checking for an exception, a crash and an empty result look the same. A changelog entry that matches the symptom is only a hypothesis. Mark every cause MEASURED or INFERRED.
+6. **Fix the cause, not the check.** Do not skip the test, mark it flaky, raise the timeout, loosen a threshold or pin a dependency version on an inferred cause. Those need a human decision.
+7. **Verify on the tree that runs.** Confirm the fix in the checkout that actually executes, not only in the worktree or branch where you made it. A fix that passed in a worktree while the live checkout ran old code is told in [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md).
+8. **Read every step of a multi-step gate.** A gate whose first step prints "passed" and whose second step dies looks like a gate that ran. Static analysis passing does not mean the tests ran.
+9. **Compare counts against the baseline.** A drop in passes or a rise in skips is a failure until explained. Never record a baseline you have not seen printed yourself. Never change the baseline in a commit that does not also change the code that moved it.
+10. **If you changed the check itself, prove it can still go red.** Break a fixture on purpose, re-run, see red, restore. A check that cannot go red is decoration.
 
 ## Verification checklist
 
-- [ ] Scope boundaries and non-goals are explicit.
-- [ ] Every factual claim has evidence from a file, command, log, screenshot, issue, PR, or cited source.
-- [ ] Verification commands or observable checks are listed with results.
-- [ ] Human approval gates below were respected.
-- [ ] No secrets, credentials, private customer data, or unauthorized production actions are exposed.
+- [ ] A log line shows whether the job actually ran.
+- [ ] The failing item was reproduced alone with the check's exact command.
+- [ ] Stdout, stderr and the exit code of the command itself were captured, with no pipe in between.
+- [ ] The failing component is named with evidence, and the cause is marked measured or inferred.
+- [ ] No test was skipped, deleted or marked flaky, and no threshold, timeout or version pin changed, without human approval.
+- [ ] The fix was confirmed on the checkout that runs the code.
+- [ ] Every step of a multi-step gate left its own output.
+- [ ] Pass, skip and fail counts match the baseline, or each difference is explained.
+- [ ] Any change to the check itself was shown to go red on a deliberate break.
 
 ## Failure modes
 
-- The agent broadens scope because it notices adjacent cleanup.
-- The agent treats a generated summary as evidence.
-- The agent reports success before running the final check.
-- The agent hides uncertainty instead of labeling unverified assumptions.
-- The agent changes public, production, or destructive state without approval.
+- **A job that never ran gets diagnosed as broken code.** A billing or runner error sends the agent hunting for a bug that is not there.
+- **The red lies about its cause.** An error handler that maps every non-numeric exit status to "timeout" reports a millisecond spawn failure as a 900-second timeout.
+- **A matching changelog entry becomes the cause.** The guess gets written into a version pin, notes and handoffs, and outlives the bug.
+- **A pipe or an echo swallows the exit code.** The run looks green and exited 1.
+- **A partial green.** The linter passes, the test runner never starts, and the gate reads as passed.
+- **Load mistaken for a regression.** Tests that spawn workers and bind ports time out on a busy machine.
+- **Skips replace passes.** The suite still prints a large "passed" number while tests quietly stopped running.
+- **The checker's own parsing breaks.** Windows line endings defeat a regex that strips timings, so every run "regresses" against its own baseline.
 
 ## Human gate
 
-Ask before disabling tests, weakening checks, or marking failures as flaky.
+Ask before disabling, skipping or deleting a test, marking it flaky, raising a timeout, loosening a threshold, pinning a version or editing a baseline. Before any of these, show the human the reproduction output and whether the cause was measured or inferred.
 
-## Good output example
+## Field notes
 
-```text
-Summary: [one-paragraph result]
-Evidence: [commands, files, links]
-Changed: [files or none]
-Verification: [exact checks and results]
-Risks: [remaining uncertainty]
-Next: [safe next step]
-```
+- A dashboard test failed with `assert 0 >= 18` after a fresh install resolved a newer version of a library. The recorded cause was a deprecation listed in the release notes. That guess went into a permanent version pin, the studio's notes and a handoff that called the dashboard broken on fresh installs. All of it was false: the charts rendered on both versions. The library's test harness had renamed an accessor, so the test looked up a dead name. Two of the other failures were leaked state cascading from the first, and one accessor fix cleared all five. Confirm which component failed before believing a changelog entry that matches the symptom.
+- The studio's health probe recorded three cause-lies. A refused spawn was reported as a 900-second timeout and cost four full waits. A test summary went to stderr and was invisible. A timeout turned out to be machine load: the machine had been running 12 containers and 25 Node processes, and run alone the suite passed in about 17 seconds, twice. More in [When the verification evidence itself was wrong](../examples/field-story-verification-evidence-lied.md).
+- A two-step gate printed the linter's "All checks passed!" and then died before the tests started. The tests had not run for two days.
+- A probe started from a worktree reported every project as regressed and missing. The cause was boring: project repos live only in the main checkout, so the worktree copy had none of them.
+- Hosted CI was retired in the studio for budget reasons. Before each push, a local verify script runs the same steps the old CI ran. A red check saying the job never started for billing reasons is not treated as a code failure.
+
+## Related workflows
+
+- [Regression-Test-First Bug Fix](13-regression-test-first-bugfix.md)
+- [Flaky Test Burn-Down](20-flaky-test-burndown.md)
+- [Dependency Upgrade Shepherd](21-dependency-upgrade-shepherd.md)
+- [Root-Cause Debugging](03-bug-root-cause.md)
+- [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md)
+- [Workflow Evaluation Harness](30-workflow-evaluation-harness.md)

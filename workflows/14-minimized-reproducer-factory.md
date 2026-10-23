@@ -1,5 +1,7 @@
 # Minimized Reproducer Factory
 
+> **Status: draft.** This card still uses the generic template shared by the early cards and has not been field-tested yet. Help make it real: see [CONTRIBUTING](../CONTRIBUTING.md).
+
 ## Trigger
 
 A bug is vague, flaky, environment-specific, or reported only in logs.
