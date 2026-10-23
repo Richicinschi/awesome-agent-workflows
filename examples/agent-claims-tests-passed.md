@@ -26,6 +26,12 @@ Use an explicit verification gate before accepting the agent's completion claim:
 - Do not treat "tests pass" as evidence unless the test execution can be verified.
 - Have CI independently run the tests before merging.
 
+Related workflow cards:
+
+- [Regression-Test-First Bug Fix](../workflows/13-regression-test-first-bugfix.md)
+- [Fresh-Context Code Review](../workflows/04-fresh-context-code-review.md)
+- [Agent-Generated Test Review](../workflows/41-agent-generated-test-review.md)
+
 ## Follow-up workflow
 
 Add a fresh-context verification step for agent-generated changes.

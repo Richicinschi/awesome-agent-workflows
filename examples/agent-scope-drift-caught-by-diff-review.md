@@ -8,7 +8,8 @@ The agent reports that the task is complete. Before merging, the maintainer revi
 
 ## Workflow selected
 
-* Fresh-Context Code Review
+* [Fresh-Context Code Review](../workflows/04-fresh-context-code-review.md)
+* [Agent Task Contract and Scope Box](../workflows/12-agent-task-contract.md)
 
 ## Agent brief
 

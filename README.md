@@ -76,9 +76,11 @@ Use the same workflows with different agents:
 - [Local/self-hosted agents](docs/tools/local-agents.md)
 - [Agent tool comparison matrix](docs/tools/comparison-matrix.md)
 
-## Worked example
+## Worked examples
 
-See [`examples/fresh-context-review-catches-unverified-pr.md`](examples/fresh-context-review-catches-unverified-pr.md) for an end-to-end example of using a workflow to catch an agent’s unverified completion claim.
+- [Fresh-context review catches an unverified PR](examples/fresh-context-review-catches-unverified-pr.md): using a workflow to catch an agent’s unverified completion claim, end to end.
+- [Diff review catches agent scope drift](examples/agent-scope-drift-caught-by-diff-review.md): the agent finished the task but also edited unrelated files.
+- [Agent claims tests passed without running them](examples/agent-claims-tests-passed.md): the verification gate that turns "tests pass" into evidence.
 
 ## What makes a workflow good?
 
