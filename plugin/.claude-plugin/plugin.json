@@ -1,0 +1,13 @@
+{
+  "name": "agent-workflows",
+  "version": "0.4.0",
+  "description": "Field-tested workflows for coding agents as skills: scope boxes, verification gates, fresh-context review and parallel-agent hygiene.",
+  "author": {
+    "name": "Richicinschi",
+    "url": "https://github.com/Richicinschi"
+  },
+  "homepage": "https://github.com/Richicinschi/awesome-agent-workflows",
+  "repository": "https://github.com/Richicinschi/awesome-agent-workflows",
+  "license": "MIT",
+  "keywords": ["workflows", "verification", "parallel-agents", "code-review", "testing"]
+}

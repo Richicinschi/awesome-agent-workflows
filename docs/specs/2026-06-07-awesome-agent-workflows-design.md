@@ -10,7 +10,7 @@ Create a new public repository with the best legitimate chance of earning large 
 
 ## Why this concept
 
-Live GitHub search showed high star ceilings around agent skills, Claude Code/Codex workflows, and agent-tooling curation. A workflow library is faster to publish than a full app, safer than open-sourcing private Astra systems, and easier for contributors to extend.
+Live GitHub search showed high star ceilings around agent skills, Claude Code/Codex workflows, and agent-tooling curation. A workflow library is faster to publish than a full app, safer than open-sourcing private systems, and easier for contributors to extend.
 
 ## Architecture
 
@@ -26,7 +26,7 @@ The repository is documentation-first:
 ## Non-goals
 
 - No fake stars, bought engagement, bots, or star exchange rings.
-- No secrets, private Astra code, or private repo content.
+- No secrets, private code, or private repo content.
 - No vendor affiliation claims.
 - No deployment or production system changes.
 

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Awesome Agent Workflows</title>
+<meta name="description" content="Search copy-pasteable workflows for shipping real work with AI coding agents safely. Filter by category, status and risk.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0B1020">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121A3A'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='%2322C55E' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --night-0:#0B1020;--night-1:#121A3A;--night-2:#1D0B2E;
+  --bg:#F2F4FA;--surface:#FFFFFF;
+  --ink:#0B1020;--ink-2:#334155;--ink-3:#566174;
+  --line:#D3D9E8;--wire:#6B86D6;--focus:#6D28D9;
+  --ft:#166534;--ft-bg:#DCFCE7;--ft-wire:#16A34A;
+  --cd:#075985;--cd-bg:#E0F2FE;--cd-wire:#0284C7;
+  --dr:#566174;--dr-wire:#8A96AB;
+  --r-low:#64748B;--r-medium:#7C3AED;--r-high:#EA580C;
+  --mark:#FDE68A;--mark-ink:#0B1020;
+  --font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0B1020;--surface:#111836;
+    --ink:#F8FAFC;--ink-2:#CBD5E1;--ink-3:#97A3B8;
+    --line:#26305A;--wire:#93C5FD;--focus:#C4B5FD;
+    --ft:#BBF7D0;--ft-bg:rgba(34,197,94,.16);--ft-wire:#22C55E;
+    --cd:#BAE6FD;--cd-bg:rgba(56,189,248,.15);--cd-wire:#38BDF8;
+    --dr:#97A3B8;--dr-wire:#5C6A86;
+    --r-low:#94A3B8;--r-medium:#A78BFA;--r-high:#FB923C;
+    --mark:rgba(250,204,21,.32);--mark-ink:#F8FAFC;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--font)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+@media (min-width:700px){.wrap{padding:0 32px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;z-index:9;padding:10px 14px;border-radius:10px;background:#F8FAFC;color:#0B1020;font-weight:700}
+.skip:focus{top:12px}
+mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 1px}
+
+/* header: the banner's night sky */
+.top{position:relative;overflow:hidden;color:#F8FAFC;--focus:#C4B5FD;background:
+  radial-gradient(55% 95% at 80% 8%,rgba(124,58,237,.55),transparent 70%),
+  radial-gradient(38% 70% at 4% 100%,rgba(6,182,212,.18),transparent 70%),
+  radial-gradient(38% 70% at 100% 100%,rgba(249,115,22,.13),transparent 70%),
+  linear-gradient(135deg,var(--night-0),var(--night-1) 52%,var(--night-2))}
+.top .wrap{position:relative;padding-top:40px;padding-bottom:34px}
+.wires{position:absolute;right:24px;top:30px;width:min(540px,46vw);color:#93C5FD;opacity:.4;pointer-events:none}
+@media (max-width:760px){.wires{display:none}}
+h1{font-size:clamp(2.2rem,5.4vw,3.7rem);line-height:1;letter-spacing:-.035em;font-weight:800;margin:0 0 14px;max-width:14ch}
+.pitch{font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.45;color:#CBD5E1;max-width:36ch;margin:0 0 20px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;padding:0;list-style:none}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font-weight:700;text-decoration:none;border:1px solid}
+.pill svg{flex:none}
+.pill-a{color:#DDD6FE;background:rgba(167,139,250,.16);border-color:rgba(167,139,250,.6)}
+.pill-b{color:#BAE6FD;background:rgba(56,189,248,.14);border-color:rgba(56,189,248,.55)}
+.pill:hover{background:rgba(248,250,252,.12)}
+.find label{display:block;font-weight:700;margin:0 0 8px}
+.field{position:relative;max-width:660px}
+.field input{width:100%;min-height:54px;padding:0 50px 0 48px;border-radius:16px;border:1px solid rgba(147,197,253,.5);background:rgba(8,12,28,.62);color:#F8FAFC;font:inherit;font-size:1.06rem}
+.field input::placeholder{color:#A3AEC2;opacity:1}
+.field input:focus-visible{border-color:#C4B5FD}
+.field .ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#93C5FD}
+.field kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);min-width:24px;padding:1px 7px;border:1px solid rgba(203,213,225,.45);border-radius:6px;color:#CBD5E1;font:600 .85rem/1.4 var(--font);text-align:center}
+@media (max-width:700px),(pointer:coarse){.field kbd{display:none}.field input{padding-right:16px}}
+.tally{margin:14px 0 0;color:#CBD5E1;font-size:.96rem}
+.tally span{white-space:nowrap}
+.tally .t-ft{color:#BBF7D0;font-weight:700}
+.tally .t-cd{color:#BAE6FD;font-weight:700}
+.tally .t-dr{color:#CBD5E1;font-weight:700}
+
+/* how to use: the banner's boxes and wires */
+.how{padding-top:30px;padding-bottom:6px}
+.how h2{font-size:1.05rem;margin:0 0 14px;color:var(--ink-2)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.step{position:relative;border:1.5px solid var(--wire);border-radius:20px;padding:14px 18px 16px;background:var(--surface)}
+.step h3{margin:0 0 4px;font-size:1.02rem;display:flex;align-items:center;gap:10px}
+.step .k{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--wire);font-size:.85rem;font-variant-numeric:tabular-nums}
+.step p{margin:0;color:var(--ink-2);font-size:.95rem}
+.step:not(:last-child)::after{content:"";position:absolute;left:30px;top:100%;width:1.5px;height:16px;background:var(--wire);transform-origin:0 0}
+@media (min-width:760px){
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:44px}
+  .step:not(:last-child)::after{left:100%;top:50%;width:44px;height:1.5px}
+}
+
+/* catalog */
+.cat{display:grid;gap:22px;padding-top:30px;padding-bottom:56px}
+@media (min-width:900px){.cat{grid-template-columns:262px minmax(0,1fr);gap:44px}}
+.ftoggle{display:none;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;justify-self:start}
+.ftoggle .c{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.8rem}
+@media (max-width:899px){.ftoggle{display:inline-flex}.filters:not(.open){display:none}}
+@media (min-width:900px){.filters{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;padding:4px 8px 4px 4px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}}
+.group{margin:0 0 24px}
+.group h3{font-size:.95rem;margin:0 0 10px}
+.opts{display:grid;gap:6px}
+.opt{display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:2px 10px;align-items:center;width:100%;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;text-align:left;cursor:pointer}
+.opt small{grid-column:2/4;color:var(--ink-3);font-size:.82rem;font-weight:400;line-height:1.35}
+.opt .n,.chip .n{color:var(--ink-3);font-weight:600;font-variant-numeric:tabular-nums}
+.opt[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font:inherit;font-size:.9rem;cursor:pointer}
+.opt:hover,.chip:hover{border-color:var(--wire)}
+.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip[aria-pressed=true] .n{color:inherit}
+.chip[aria-pressed=true]::before{content:"\2713";font-weight:800}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--dr-wire);border-style:dashed}
+.s-field-tested{background:var(--ft-wire);border:2px solid var(--ft-wire)}
+.s-candidate{border:3px solid var(--cd-wire)}
+.btn{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.btn:hover{border-color:var(--wire)}
+
+.rhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin:0 0 6px}
+.rhead h2{font-size:1.4rem;letter-spacing:-.02em;margin:0}
+.shown{margin:0 0 18px;color:var(--ink-3);font-size:.95rem}
+.list{list-style:none;margin:0;padding:0}
+
+/* each workflow hangs off one wire; the line style says how proven it is */
+.wf{position:relative;padding:0 0 12px 34px}
+.wf::before{content:"";position:absolute;left:11px;top:0;bottom:0;border-left:2px dashed var(--dr-wire)}
+.wf[data-s=field-tested]::before{left:10.5px;border-left:3px solid var(--ft-wire)}
+.wf[data-s=candidate]::before{border-left:2px solid var(--cd-wire)}
+.wf:first-child::before{top:24px}
+.wf:last-child::before{bottom:auto;height:24px}
+.wf:only-child::before{display:none}
+.wf::after{content:"";position:absolute;left:5px;top:21px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px dashed var(--dr-wire)}
+.wf[data-s=field-tested]::after{background:var(--ft-wire);border:2px solid var(--ft-wire)}
+.wf[data-s=candidate]::after{border:3px solid var(--cd-wire)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 18px 12px}
+.wf[data-s=field-tested] .box{border-color:var(--ft-wire)}
+.wf[data-s=draft] .box{background:transparent}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.num{color:var(--ink-3);font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums}
+.head h3{margin:0;font-size:1.12rem;line-height:1.3;letter-spacing:-.01em;flex:1 1 15rem;min-width:0;overflow-wrap:anywhere}
+.head h3 a{text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;text-decoration-thickness:2px}
+.head h3 a:hover{text-decoration-color:var(--wire)}
+.wf[data-s=draft] h3{color:var(--ink-2);font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:1px 10px;border-radius:999px;border:1px solid;font-size:.8rem;font-weight:700;white-space:nowrap}
+.b-field-tested{color:var(--ft);background:var(--ft-bg);border-color:var(--ft-wire)}
+.b-candidate{color:var(--cd);background:var(--cd-bg);border-color:var(--cd-wire)}
+.b-draft{color:var(--dr);border:1px dashed var(--dr-wire);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin:6px 0 10px;font-size:.88rem;color:var(--ink-2)}
+.meta .c{font-weight:700}
+.risk{display:inline-flex;align-items:center;gap:6px}
+.meter{display:inline-flex;gap:2px}
+.meter i{width:4px;height:11px;border-radius:1px;background:var(--line)}
+.r-low .on{background:var(--r-low)}.r-medium .on{background:var(--r-medium)}.r-high .on{background:var(--r-high)}
+.tags{color:var(--ink-3);overflow-wrap:anywhere}
+.facts{margin:0;display:grid;gap:6px}
+.facts div{display:grid;gap:0 14px}
+@media (min-width:560px){.facts div{grid-template-columns:5.4rem minmax(0,1fr)}}
+.facts dt{font-size:.86rem;font-weight:700;color:var(--ink-3);padding-top:.1em}
+.facts dd{margin:0;color:var(--ink-2);overflow-wrap:anywhere}
+.wf details{margin-top:10px;border-top:1px solid var(--line)}
+.wf summary{display:inline-flex;align-items:center;gap:8px;min-height:40px;font-size:.9rem;font-weight:700;color:var(--ink-2);cursor:pointer;list-style:none}
+.wf summary::-webkit-details-marker{display:none}
+.wf summary::before{content:"";width:7px;height:7px;border-right:2px solid;border-bottom:2px solid;transform:rotate(-45deg)}
+.wf details[open] summary::before{transform:rotate(45deg)}
+.wf details p{margin:0 0 6px;color:var(--ink-2)}
+.empty,.err{border:1.5px dashed var(--dr-wire);border-radius:14px;padding:22px;color:var(--ink-2)}
+.empty p,.err p{margin:0 0 12px}
+.empty b,.err b{color:var(--ink)}
+.err a{font-weight:700}
+
+.foot{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--ink-2);font-size:.92rem}
+.foot p{margin:0 0 10px}
+.foot ul{display:flex;flex-wrap:wrap;gap:6px 20px;margin:0;padding:0;list-style:none}
+.foot a{font-weight:700;text-underline-offset:3px}
+
+@media (prefers-reduced-motion:no-preference){
+  .step:not(:last-child)::after{animation:draw .7s cubic-bezier(.2,.7,.2,1) .2s both}
+  .step:nth-child(2)::after{animation-delay:.5s}
+  .wf summary::before{transition:transform .15s}
+  @keyframes draw{from{transform:scale(0)}}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#results">Skip to workflows</a>
+<header class="top">
+  <svg class="wires" viewBox="104 88 1004 316" fill="none" aria-hidden="true" focusable="false"><g stroke="currentColor" stroke-width="2"><path d="M154 156H342C365 156 384 175 384 198V276C384 299 365 318 342 318H154C131 318 112 299 112 276V198C112 175 131 156 154 156Z"/><path d="M470 96H688C711 96 730 115 730 138V216C730 239 711 258 688 258H470C447 258 428 239 428 216V138C428 115 447 96 470 96Z"/><path d="M820 174H1058C1081 174 1100 193 1100 216V294C1100 317 1081 336 1058 336H820C797 336 778 317 778 294V216C778 193 797 174 820 174Z"/><path d="M384 237H428M730 177L778 238M248 318V396H900V336"/></g></svg>
+  <div class="wrap">
+    <h1>Awesome Agent Workflows</h1>
+    <p class="pitch">Copy-pasteable workflows for shipping real work with AI coding agents safely.</p>
+    <ul class="links">
+      <li><a class="pill pill-a" href="https://github.com/Richicinschi/awesome-agent-workflows"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View the repo on GitHub</a></li>
+      <li><a class="pill pill-b" href="https://github.com/Richicinschi/awesome-agent-workflows#readme">Read the README</a></li>
+      <li><a class="pill pill-b" href="https://github.com/Richicinschi/awesome-agent-workflows#install-as-agent-skills">Install as skills</a></li>
+    </ul>
+    <div class="find" role="search">
+      <label for="q">Find a workflow</label>
+      <div class="field">
+        <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <input id="q" type="search" placeholder="Try: flaky tests, release, worktree" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="qhint">
+        <kbd aria-hidden="true">/</kbd>
+      </div>
+      <p id="qhint" class="sr">Searches titles, situations, goals and tags. Results update as you type. Press slash to jump here.</p>
+    </div>
+    <p class="tally" id="tally">Loading the catalog.</p>
+  </div>
+</header>
+
+<main>
+  <section class="how wrap" aria-labelledby="how-h">
+    <h2 id="how-h">How to use a workflow</h2>
+    <ol class="steps">
+      <li class="step"><h3><span class="k" aria-hidden="true">1</span>Pick a workflow</h3><p>Search or filter for your situation. Field-tested cards are listed first.</p></li>
+      <li class="step"><h3><span class="k" aria-hidden="true">2</span>Paste its agent brief</h3><p>Open the card, copy its Agent brief into your agent and fill in the bracketed parts.</p></li>
+      <li class="step"><h3><span class="k" aria-hidden="true">3</span>Run its verification</h3><p>Run the card's verification and keep the output before you call the work done.</p></li>
+    </ol>
+  </section>
+
+  <div class="cat wrap">
+    <button class="ftoggle" id="ftoggle" type="button" aria-expanded="false" aria-controls="filters">Filters <span class="c" id="fcount" hidden></span></button>
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="group" role="group" aria-labelledby="g-status"><h3 id="g-status">Status</h3><div class="opts" id="f-status"></div></div>
+      <div class="group" role="group" aria-labelledby="g-risk"><h3 id="g-risk">Risk level</h3><div class="chips" id="f-risk"></div></div>
+      <div class="group" role="group" aria-labelledby="g-cat"><h3 id="g-cat">Category</h3><div class="chips" id="f-cat"></div></div>
+    </aside>
+    <section id="results" aria-labelledby="res-h" tabindex="-1">
+      <div class="rhead"><h2 id="res-h">Workflows</h2><button class="btn" id="clear" type="button" hidden>Clear search and filters</button></div>
+      <p class="shown" id="shown" aria-live="polite">Loading workflows.</p>
+      <ul class="list" id="list"></ul>
+      <div class="empty" id="empty" hidden>
+        <p><b>No workflows match.</b> Try fewer or different words, or remove a filter.</p>
+        <button class="btn" type="button" data-clear>Clear search and filters</button>
+      </div>
+      <div class="err" id="err" hidden></div>
+      <noscript><div class="err"><p><b>Search needs JavaScript.</b> You can still browse every card in the <a href="https://github.com/Richicinschi/awesome-agent-workflows/blob/main/docs/WORKFLOW-CATALOG.md">workflow catalog on GitHub</a>.</p></div></noscript>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>MIT licensed. Community-maintained and not affiliated with any AI or tool vendor.</p>
+    <ul>
+      <li><a href="https://github.com/Richicinschi/awesome-agent-workflows/blob/main/CONTRIBUTING.md">Contributing guide</a></li>
+      <li><a href="https://github.com/Richicinschi/awesome-agent-workflows/blob/main/LICENSE">MIT license</a></li>
+      <li><a href="agent-workflows.json">Catalog as JSON</a></li>
+      <li><a href="https://github.com/Richicinschi/awesome-agent-workflows">Source on GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const BLOB = 'https://github.com/Richicinschi/awesome-agent-workflows/blob/main/';
+  const ST = ['field-tested', 'candidate', 'draft'];
+  const SL = {'field-tested': 'Field-tested', candidate: 'Candidate', draft: 'Draft'};
+  const SD = {
+    'field-tested': 'Used on real work. The card includes field notes.',
+    candidate: 'Written out in full, not yet proven in real use.',
+    draft: 'Early card from a generic template. Read it critically.'
+  };
+  const RK = ['low', 'medium', 'high'];
+  const F = ['status', 'risk', 'cat'];
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const cap = s => ({ci: 'CI', qa: 'QA'}[s] || s.charAt(0).toUpperCase() + s.slice(1));
+  const state = {q: '', status: new Set(), risk: new Set(), cat: new Set()};
+  const key = (it, f) => f === 'status' ? it.status : f === 'risk' ? it.risk : it.category;
+  let data = [], terms = [], re = null, timer = 0;
+
+  const q = $('q'), list = $('list');
+
+  function norm(x) {
+    const tags = Array.isArray(x.tags) ? x.tags.map(String) : [];
+    const m = /^(\d+)-/.exec(String(x.path || '').split('/').pop());
+    return {
+      id: String(x.id || ''), title: String(x.title || x.id || 'Untitled'), path: String(x.path || ''),
+      category: String(x.category || 'other').toLowerCase(), risk: String(x.risk_level || 'unrated').toLowerCase(),
+      status: ST.includes(x.status) ? x.status : 'draft', num: m ? parseInt(m[1], 10) : 9999,
+      trigger: String(x.trigger || ''), goal: String(x.goal || ''), verification: String(x.verification || ''), tags,
+      hay: [x.title, x.trigger, x.goal, tags.join(' ')].join(' ').toLowerCase()
+    };
+  }
+
+  function hl(text) {
+    if (!re) return esc(text);
+    let out = '', i = 0;
+    text.replace(re, (m, p) => { out += esc(text.slice(i, p)) + '<mark>' + esc(m) + '</mark>'; i = p + m.length; return m; });
+    return out + esc(text.slice(i));
+  }
+
+  function pass(it, skip) {
+    for (const f of F) if (f !== skip && state[f].size && !state[f].has(key(it, f))) return false;
+    return terms.every(t => it.hay.includes(t));
+  }
+
+  function card(it) {
+    const lvl = RK.indexOf(it.risk);
+    const meter = RK.map((_, i) => '<i' + (i <= lvl ? ' class="on"' : '') + '></i>').join('');
+    const tags = it.tags.length ? '<span class="tags"><span class="sr">Tags: </span>' + it.tags.map(hl).join(', ') + '</span>' : '';
+    return '<li class="wf" id="wf-' + esc(it.id) + '" data-s="' + it.status + '"><article class="box">' +
+      '<div class="head">' + (it.num < 9999 ? '<span class="num"><span class="sr">Card </span>' + it.num + '</span>' : '') +
+      '<h3><a href="' + esc(BLOB + encodeURI(it.path)) + '">' + hl(it.title) + '</a></h3>' +
+      '<span class="badge b-' + it.status + '" title="' + esc(SD[it.status]) + '"><span class="sr">Status: </span>' + SL[it.status] + '</span></div>' +
+      '<p class="meta"><span class="c"><span class="sr">Category: </span>' + esc(cap(it.category)) + '</span>' +
+      '<span class="risk r-' + esc(it.risk) + '"><span class="meter" aria-hidden="true">' + meter + '</span>' + esc(cap(it.risk)) + ' risk</span>' + tags + '</p>' +
+      '<dl class="facts"><div><dt>Use when</dt><dd>' + hl(it.trigger) + '</dd></div><div><dt>Goal</dt><dd>' + hl(it.goal) + '</dd></div></dl>' +
+      (it.verification ? '<details><summary>How to verify</summary><p>' + esc(it.verification) + '</p></details>' : '') +
+      '</article></li>';
+  }
+
+  function facet(f, vals, label, desc) {
+    $('f-' + f).innerHTML = vals.map(v =>
+      '<button type="button" class="' + (desc ? 'opt' : 'chip') + '" data-f="' + f + '" data-v="' + esc(v) + '" aria-pressed="false">' +
+      (desc ? '<span class="dot s-' + esc(v) + '" aria-hidden="true"></span>' : '') +
+      '<span>' + esc(label(v)) + '</span><span class="n"></span>' + (desc ? '<small>' + esc(desc[v]) + '</small>' : '') + '</button>'
+    ).join('');
+  }
+
+  function render() {
+    terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    re = terms.length ? new RegExp(terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'gi') : null;
+    const hits = data.filter(it => pass(it));
+    list.innerHTML = hits.map(card).join('');
+    $('empty').hidden = hits.length > 0;
+    $('shown').textContent = hits.length === data.length
+      ? 'Showing all ' + data.length + ' workflows. Field-tested first, then by card number.'
+      : 'Showing ' + hits.length + ' of ' + data.length + ' workflows.';
+    document.querySelectorAll('[data-f]').forEach(b => {
+      const f = b.dataset.f, v = b.dataset.v;
+      b.setAttribute('aria-pressed', state[f].has(v));
+      b.querySelector('.n').textContent = data.filter(it => key(it, f) === v && pass(it, f)).length;
+    });
+    const active = state.status.size + state.risk.size + state.cat.size;
+    $('fcount').hidden = !active;
+    $('fcount').textContent = active;
+    $('clear').hidden = !(active || state.q) || !hits.length;
+    save();
+  }
+
+  function save() {
+    const p = new URLSearchParams();
+    if (state.q) p.set('q', state.q);
+    F.forEach(f => { if (state[f].size) p.set(f, [...state[f]].join(',')); });
+    const s = p.toString();
+    try { history.replaceState(null, '', s ? '?' + s : location.pathname); } catch (e) {}
+  }
+
+  function clearAll() {
+    state.q = q.value = '';
+    F.forEach(f => state[f].clear());
+    render();
+  }
+
+  function init(raw) {
+    if (!Array.isArray(raw)) throw new Error('unexpected file format');
+    data = raw.map(norm).sort((a, b) => ST.indexOf(a.status) - ST.indexOf(b.status) || a.num - b.num || a.title.localeCompare(b.title));
+    const cats = [...new Set(data.map(it => it.category))].sort();
+    const risks = [...new Set(data.map(it => it.risk))].sort((a, b) => (RK.indexOf(a) + 1 || 9) - (RK.indexOf(b) + 1 || 9));
+    facet('status', ST, v => SL[v], SD);
+    facet('risk', risks, cap);
+    facet('cat', cats, cap);
+    const known = {status: ST, risk: risks, cat: cats};
+    const p = new URLSearchParams(location.search);
+    state.q = q.value = p.get('q') || '';
+    F.forEach(f => (p.get(f) || '').split(',').forEach(v => { if (known[f].includes(v)) state[f].add(v); }));
+    const n = s => data.filter(it => it.status === s).length;
+    $('tally').innerHTML = data.length + ' workflows: <span class="t-ft">' + n('field-tested') + ' field-tested</span> · <span class="t-cd">' +
+      n('candidate') + ' candidate</span> · <span class="t-dr">' + n('draft') + ' draft</span>';
+    render();
+  }
+
+  q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(() => { state.q = q.value.trim(); render(); }, 90); });
+  q.addEventListener('keydown', e => { if (e.key === 'Escape' && q.value) { e.preventDefault(); clearAll(); } });
+  document.addEventListener('keydown', e => {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target;
+    if (t.closest && t.closest('input,textarea,select,[contenteditable]')) return;
+    e.preventDefault(); q.focus(); q.select();
+  });
+  $('filters').addEventListener('click', e => {
+    const b = e.target.closest('[data-f]');
+    if (!b) return;
+    const s = state[b.dataset.f], v = b.dataset.v;
+    s.has(v) ? s.delete(v) : s.add(v);
+    render();
+  });
+  document.addEventListener('click', e => { if (e.target.closest('[data-clear]')) { clearAll(); q.focus(); } });
+  $('clear').addEventListener('click', () => { clearAll(); q.focus(); });
+  $('ftoggle').addEventListener('click', () => {
+    const open = $('filters').classList.toggle('open');
+    $('ftoggle').setAttribute('aria-expanded', open);
+  });
+
+  fetch('agent-workflows.json', {cache: 'no-cache'})
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(init)
+    .catch(err => {
+      $('tally').textContent = 'The catalog did not load.';
+      $('shown').textContent = '';
+      const local = location.protocol === 'file:' ? ' Pages opened straight from disk cannot read it; serve the folder over HTTP instead.' : '';
+      $('err').innerHTML = '<p><b>The workflow catalog did not load (' + esc(err.message) + ').</b>' + esc(local) + '</p>' +
+        '<p>Every card is also listed in the <a href="' + BLOB + 'docs/WORKFLOW-CATALOG.md">workflow catalog on GitHub</a>.</p>';
+      $('err').hidden = false;
+    });
+})();
+</script>
+</body>
+</html>

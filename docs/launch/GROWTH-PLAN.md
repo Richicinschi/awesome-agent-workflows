@@ -30,7 +30,7 @@ Audience:
 - [Posting Checklist](POSTING-CHECKLIST.md) for a staged, feedback-first launch.
 - [Community Issue Seeds](COMMUNITY-ISSUE-SEEDS.md) for participation hooks.
 - Short launch thread with three concrete examples.
-- Show HN post focused on lessons learned, not hype.
+- Hacker News post focused on lessons learned, not hype. Show HN is only for something people can try (here: the installable skills plugin); otherwise submit the strongest single page as a normal link.
 - Reddit post for communities that allow project sharing.
 - Issue labels for `workflow request`, `resource suggestion`, `good first issue`.
 
@@ -73,6 +73,8 @@ Use it for fresh-context review, regression-test-first bug fixes, parallel workt
 Demo and repo: https://github.com/Richicinschi/awesome-agent-workflows
 
 ### Show HN draft
+
+Use this only when leading with the installable skills plugin. Show HN rules exclude reading material and lists, so for docs alone submit a field story as a normal link instead.
 
 Show HN: Awesome Agent Workflows — practical playbooks for using coding agents safely
 

@@ -1,5 +1,7 @@
 # Root-Cause Debugging
 
+> **Status: draft.** This card still uses the generic template shared by the early cards and has not been field-tested yet. Help make it real: see [CONTRIBUTING](../CONTRIBUTING.md).
+
 ## Trigger
 
 A bug is unclear, intermittent, or has already survived a quick fix.

@@ -11,11 +11,16 @@ AI agents are powerful, but most examples stop at toy prompts. This repo collect
 
 This is not an agent framework. It is not a prompt dump. It is a library of practical operating procedures for people using Claude Code, Codex CLI, Cursor agents, Aider, OpenCode, Gemini-style agents, local agents, LangGraph/CrewAI systems, or custom tool-using assistants.
 
+**Every card says how far it has been proven.** 14 are **field-tested**, distilled from running up to ten coding-agent sessions at once in a one-person studio. 1 is a reviewed **candidate**. 26 are still **drafts** on a generic template. Turning a draft into a real card is the most useful contribution: see [CONTRIBUTING](CONTRIBUTING.md).
+
+**Search and filter every card at [richicinschi.github.io/awesome-agent-workflows](https://richicinschi.github.io/awesome-agent-workflows/).**
+
 ## Start here by situation
 
 - **I have a vague feature request** → [Spec → Plan → Implementation](workflows/01-spec-to-plan.md)
 - **I want to run agents in parallel** → [Parallel Agent Development](workflows/02-parallel-agent-development.md) + [Git Worktree Agent Lanes](workflows/35-git-worktree-agent-lanes.md)
 - **The agent says it fixed a bug, but I do not trust it** → [Regression-Test-First Bug Fix](workflows/13-regression-test-first-bugfix.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
+- **An agent added tests, but I do not trust the coverage** → [Agent-Generated Test Review](workflows/41-agent-generated-test-review.md)
 - **CI failed after an agent change** → [CI Red-to-Green Reproducer](workflows/19-ci-red-to-green.md)
 - **Tests are flaky** → [Flaky Test Burn-Down](workflows/20-flaky-test-burndown.md)
 - **I am about to merge AI-generated code** → [Agent Patch Intake Triage](workflows/16-patch-intake-triage.md) + [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md)
@@ -45,23 +50,42 @@ The demo uses a synthetic public-safe storyboard to show the core loop: choose a
 
 Start with [`templates/agent-brief.md`](templates/agent-brief.md), then browse the full catalog in [`docs/WORKFLOW-CATALOG.md`](docs/WORKFLOW-CATALOG.md).
 
+## Install as agent skills
+
+The field-tested and candidate cards also ship as skills, so your agent can follow a workflow without you pasting it.
+
+**Claude Code** (2.1.275 or later):
+
+```text
+/plugin install agent-workflows --marketplace Richicinschi/awesome-agent-workflows
+```
+
+On older versions, run `/plugin marketplace add Richicinschi/awesome-agent-workflows`, then `/plugin install agent-workflows@awesome-agent-workflows`. Start a workflow with, for example, `/agent-workflows:fresh-context-code-review`.
+
+**Codex CLI and other agents that read `SKILL.md`:** copy the folders in [`plugin/skills/`](plugin/skills/) into `~/.agents/skills/`, or into `.agents/skills/` inside your repo.
+
+The skills are generated from the cards by `scripts/build_skills.py`, so the cards stay the single source.
+
 ## Workflow library
 
-The repository now includes **40 workflow cards** across planning, execution, debugging, review, testing, CI, release, security, operations, team process, evaluation, product, and documentation.
+The library has **41 workflow cards**. Start with the field-tested ones:
 
-A few high-value cards:
+- [Spec → Plan → Implementation](workflows/01-spec-to-plan.md): drill a vague request into a decision-resolved spec before any code.
+- [Agent Task Contract and Scope Box](workflows/12-agent-task-contract.md): delegate with goal, scope, non-goals, verification and stop conditions.
+- [Parallel Agent Development](workflows/02-parallel-agent-development.md): split work across agents without them colliding.
+- [Git Worktree Agent Lanes](workflows/35-git-worktree-agent-lanes.md): one lane per agent, shared surfaces changed only through worktrees.
+- [Fresh-Context Code Review](workflows/04-fresh-context-code-review.md): one independent review, handed the raw files instead of the author's summary.
+- [Regression-Test-First Bug Fix](workflows/13-regression-test-first-bugfix.md): prove the test fails before the fix.
+- [CI Red-to-Green Reproducer](workflows/19-ci-red-to-green.md): trust counts against a baseline, not the colour of the check.
+- [Long-Running Task Checkpoint](workflows/40-long-running-task-checkpoint.md): run long jobs where the logs survive and silence is an alarm.
+- [Context Compaction and Handoff](workflows/36-context-compaction-handoff.md): hand off a long session without losing decisions.
+- [Agent Memory Hygiene Review](workflows/32-agent-memory-hygiene-review.md): keep agent memory true; archive, never silently delete.
+- [MCP and Tool Integration Review](workflows/37-mcp-tool-integration-review.md): scan and review a tool or skill before an agent may load it.
+- [Secrets and Config Audit](workflows/38-secrets-config-audit.md): audit the whole git history before a public push.
+- [Research Brief](workflows/08-research-brief.md): design the search so it can find what would prove you wrong.
+- [Repo Growth Launch](workflows/10-repo-growth-launch.md): launch a public repo honestly, written from this repo's own launch.
 
-- [Change Impact Map](workflows/11-change-impact-map.md) — map blast radius before editing unfamiliar code.
-- [Agent Task Contract and Scope Box](workflows/12-agent-task-contract.md) — delegate without drive-by edits.
-- [Golden Master Refactor](workflows/15-golden-master-refactor.md) — refactor legacy code safely.
-- [Dependency Upgrade Shepherd](workflows/21-dependency-upgrade-shepherd.md) — upgrade libraries with rollback notes.
-- [Migration Readiness and Cutover Planner](workflows/25-migration-cutover-planner.md) — stage risky migrations.
-- [Workflow Evaluation Harness](workflows/30-workflow-evaluation-harness.md) — evaluate agent workflows before rollout.
-- [Prompt and Policy Change Control](workflows/31-prompt-policy-change-control.md) — change prompts and guardrails safely.
-- [MCP and Tool Integration Review](workflows/37-mcp-tool-integration-review.md) — review tool permissions and data flow.
-- [Secrets and Config Audit](workflows/38-secrets-config-audit.md) — check public-release and CI safety.
-
-For machine-readable metadata, see [`agent-workflows.json`](agent-workflows.json).
+The other cards, with their status, are in the [catalog](docs/WORKFLOW-CATALOG.md). For machine-readable metadata, including each card's status and the evidence that proves it worked (for drafts, the target a rewrite must meet), see [`agent-workflows.json`](agent-workflows.json).
 
 ## Tool adapters
 
@@ -75,9 +99,19 @@ Use the same workflows with different agents:
 - [Local/self-hosted agents](docs/tools/local-agents.md)
 - [Agent tool comparison matrix](docs/tools/comparison-matrix.md)
 
-## Worked example
+## Worked examples
 
-See [`examples/fresh-context-review-catches-unverified-pr.md`](examples/fresh-context-review-catches-unverified-pr.md) for an end-to-end example of using a workflow to catch an agent’s unverified completion claim.
+- [Fresh-context review catches an unverified PR](examples/fresh-context-review-catches-unverified-pr.md): using a workflow to catch an agent’s unverified completion claim, end to end.
+- [Diff review catches agent scope drift](examples/agent-scope-drift-caught-by-diff-review.md): the agent finished the task but also edited unrelated files.
+- [Agent claims tests passed without running them](examples/agent-claims-tests-passed.md): the verification gate that turns "tests pass" into evidence.
+
+### Field stories
+
+Real incidents from a one-person studio running up to ten coding-agent sessions at once, each with the guardrail that came out of it:
+
+- [A guardrail built for one agent became a 90% false alarm at ten](examples/field-story-one-guardrail-ten-agents.md): why hub-wide checks break under parallel agents, and the recency rule that fixed it.
+- [Eight ways a green test suite proved nothing](examples/field-story-tests-that-cannot-fail.md): tests that could not fail, every one caught by review or mutation testing, none by the suite.
+- [When the verification evidence itself was wrong](examples/field-story-verification-evidence-lied.md): pipes that ate exit codes, swallowed summaries, and 17 tests that silently became skips.
 
 ## What makes a workflow good?
 

@@ -98,6 +98,8 @@ Catalog: https://github.com/Richicinschi/awesome-agent-workflows/blob/main/docs/
 
 ## Show HN
 
+Use only when leading with the installable skills plugin: Show HN is for things people can try and excludes reading material and lists. For the docs alone, submit a field story as a normal link.
+
 Title:
 
 Show HN: Awesome Agent Workflows — practical playbooks for coding agents

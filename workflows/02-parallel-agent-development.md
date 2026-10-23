@@ -1,63 +1,97 @@
 # Parallel Agent Development
 
+> **Status: field-tested.** Distilled from running up to ten coding-agent sessions at once, plus subagent waves of twenty to thirty, in a one-person studio (2026).
+
 ## Trigger
 
-Two or more tasks can be done independently: docs + tests, frontend + backend, audit + implementation.
+A phase of work splits into tasks that do not need each other's output: per-module edits, per-page content, docs plus tests, one audit cell per file. Each task can be briefed in fewer words than it takes to do, and finishing them one by one would leave you waiting on mechanical work.
 
 ## Goal
 
-Independent agent briefs, isolated workspaces, and a final integration pass.
+Finish the phase faster without agents colliding. Every task owns a measured, disjoint set of files. Shared files, builds, browsers, commits in a shared checkout and all merging have exactly one owner: the lead. The lead accepts work only from what is on disk, then integrates and verifies once on the combined result.
 
 ## Agent brief
 
 ```text
-You are executing the "Parallel Agent Development" workflow.
+You are one of [N] agents working in parallel on [phase goal]. Other agents are live at the same time.
 
-Context:
-- Repo/system: [name and path]
-- User goal: [goal]
-- Allowed scope: [files, commands, services]
-- Forbidden scope: [secrets, production, unrelated files, destructive actions]
+Before anything else, read [path to the dispatch-lessons file].
 
-Required output:
-- Actions taken
-- Evidence collected
-- Files changed
-- Verification commands and results
-- Blockers or stop conditions
+Your task: [one-sentence outcome]
+Workspace: [absolute path to your worktree or repo]
+Edit only these files: [measured list]
+Shared files you must NOT write: [ledgers, metadata, indexes]. Put that data in your report instead.
+
+Git (keep the line that applies):
+- Shared checkout: do not commit, stage, stash or switch branches. The lead commits.
+- Own worktree: commit only to [lane branch]. Never merge, and never touch other branches.
+
+Do not:
+- run the production build, clear build caches or stop dev servers,
+- drive the shared browser session [unless this is the browser lane],
+- change shared rules, interfaces or config, even if they look wrong. Report it instead.
+
+Use absolute paths in every command. The working directory can reset between commands.
+
+Done when: [acceptance criteria]
+Verify with: [exact command]. Read its exit code directly, never through a pipe.
+
+Report:
+- Files changed (must be a subset of your edit list)
+- Files in your list you did not change, and why
+- Verification command, exit code, raw summary line
+- Data for the shared files, if any
+- New friction or environment surprises a later agent should know
 ```
 
 ## Steps
 
-1. Restate the goal, scope, and non-goals in one paragraph.
-2. Gather only the context needed for this workflow.
-3. Identify the riskiest assumption and test it early.
-4. Execute in small increments.
-5. Record evidence as you go.
-6. Run the verification checklist before any success claim.
-7. Leave a handoff note with exact next steps.
+1. **Decide what stays with the lead.** Keep architecture and judgement calls, the split itself, anything spanning more than one repo, anything that needs git operations, and any task whose brief would be longer than the work. Delegate bulk, uniform, file-independent work.
+2. **Measure each task's file list.** Produce it with a search or a file listing, never from memory, and check that no two lists intersect. If two do, merge those tasks or run them in sequence.
+3. **Take shared files out of the tasks.** Ledgers, metadata files, indexes and shared config are written by nobody in the wave. Workers return that data in their reports and the lead merges it once.
+4. **Give every shared resource one owner.** Disjoint files are not enough. Name the resources that collide anyway: the git index of a shared checkout (only the lead commits there; a worker in its own worktree has its own index, commits only to its lane branch and never merges), build output and dependency caches (no parallel builds, no cache clearing), a shared browser automation session (one agent per wave drives it), and running dev servers.
+5. **Freeze the rules before dispatch.** If briefs are generated from a plan, patch the plan first, so the next wave is not briefed against a name that no longer exists. A rule change that comes up mid-wave waits for a sequential pass afterwards.
+6. **Isolate workers that share a repo.** One worktree and branch per implementer (see [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md)), or one repo per agent. Start the longest-running tracks first, even before the plan document is finished.
+7. **Dispatch the wave at once, sized to your limits.** Send every independent brief together. If your harness caps concurrent agents, read the cap from its error instead of guessing, and batch above it. Very large fan-outs can trip server-side rate limits, so prefer several waves of moderate size.
+8. **Judge progress from disk only.** A dispatch acknowledgement looks the same for every agent, a quiet transcript does not mean an idle agent, and a final report can be wrong. Compare each worker's changed files against its edit list and rerun its verification yourself.
+9. **Integrate centrally, verify once, record lessons.** Merge lanes one at a time, check `git diff --cached` before each commit, run the full check on the integrated tree, then commit from the lead. For mechanical work one review of the integrated result is enough; keep per-task review for risky or ambiguous tasks. Append every friction a worker reported, and every correction you had to send, to the dispatch-lessons file.
 
 ## Verification checklist
 
-- [ ] Scope boundaries are explicit.
-- [ ] Assumptions are labeled.
-- [ ] Evidence is from tools, files, commands, screenshots, or cited sources.
-- [ ] No secrets are printed or requested.
-- [ ] The final status distinguishes verified facts from recommendations.
+- [ ] Each task's file list came from a command, and no two lists intersect.
+- [ ] `git diff --name-only` for each worker shows only files from its edit list.
+- [ ] No worker committed in a shared checkout or outside its own lane branch, merged anything, built, cleared a cache or drove the browser outside its assignment.
+- [ ] Shared files were written once, by the lead, after the wave.
+- [ ] Every assigned file is either changed on disk or explained in the worker's report.
+- [ ] The full verification ran on the integrated tree, with the exit code read directly.
+- [ ] `git diff --cached` before the final commit contains only intended changes.
+- [ ] New friction is in the dispatch-lessons file before the next wave is briefed.
 
 ## Failure modes
 
-- Treating a confident model answer as evidence.
-- Expanding scope because the agent found adjacent problems.
-- Reporting "done" before running the verification command.
-- Losing track of files changed by parallel or delegated workers.
+- **Inferred file lists.** In one sub-project the guessed list was too narrow four separate times, each found only after the agents had finished.
+- **A rule changed mid-flight.** A color mapping gained rules while eight agents were working. Their output disagreed with itself and needed a whole reconciliation task.
+- **A shared browser.** Page selection in a shared browser automation server was global. One agent's navigation hard-reloaded another agent's page onto the wrong dev server and wiped its in-memory state. A named isolated context did not prevent it.
+- **Workers committing in a shared checkout.** Commits from several agents in one checkout race for its git index lock, and `git checkout [rev] -- [path]` silently stages a file that a later, unrelated commit sweeps in. Workers in their own worktrees each have their own index, so they commit to their lane branch and leave merging to the lead.
+- **Trusting the report.** An agent claimed success while silently skipping an entire assigned spec file. Only checking the files on disk caught it.
+- **Reading meaning into silence.** A slow agent was taken as proof that dispatches above the limit queue. They did not; that wave was simply under the limit. A null result was over-read as a finding and later retracted.
+- **Fan-out too wide.** In one fan-out of about 60 agents, about 36 of 62 calls were rate-limited by the server, the final synthesis step included.
+- **Over-orchestration.** Identical implement-then-review cycles on routine tasks add noise, not safety. The time the human stopped one such loop is told in [Fresh-Context Code Review](04-fresh-context-code-review.md).
 
 ## Human gate
 
-Never let parallel agents edit the same files without an integration owner.
+The human approves the split before dispatch: the task list, each edit list, and who owns each shared resource. Any change to a shared rule during a wave is the human's call and waits for a sequential pass. Merging the integrated result stays with the human.
 
-## Related templates
+## Field notes
 
-- [Agent brief](../templates/agent-brief.md)
-- [PR review](../templates/pr-review.md)
-- [Release checklist](../templates/release-checklist.md)
+- A mostly mechanical find-and-replace across 24 files, with a few judgement calls, ran in the foreground for about 30 minutes while the next step waited. The correction became a standing rule: the lead orchestrates and keeps tracks moving. A self-contained brief of about 30 lines (goal, exact files, exact rules, what to preserve, acceptance criteria) would have let it run in parallel.
+- Early on, sessions produced conflicting commits because they shared one working tree and one HEAD. Once every project became its own repository, agents on different projects could no longer entangle, and only the shared workspace repo still needed a rule.
+- Exceeding the concurrent-agent limit raised an immediate, explicit error, never a silent drop. The observed ceiling in one session was 32, not the 20 assumed, and 20 of 21 agent transcripts were 0 bytes while those agents were provably working. Only the files on disk told the truth.
+- A guardrail written for one session became a 90% false alarm at ten, because it checked shared state but blamed the current session: [one guardrail, ten agents](../examples/field-story-one-guardrail-ten-agents.md).
+
+## Related workflows
+
+- [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md)
+- [Agent Task Contract and Scope Box](12-agent-task-contract.md)
+- [Multi-Repo Change Coordinator](34-multi-repo-change-coordinator.md)
+- [Fresh-Context Code Review](04-fresh-context-code-review.md)
