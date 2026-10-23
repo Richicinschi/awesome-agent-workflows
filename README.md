@@ -13,6 +13,8 @@ This is not an agent framework. It is not a prompt dump. It is a library of prac
 
 **Every card says how far it has been proven.** 14 are **field-tested**, distilled from running up to ten coding-agent sessions at once in a one-person studio. 1 is a reviewed **candidate**. 26 are still **drafts** on a generic template. Turning a draft into a real card is the most useful contribution: see [CONTRIBUTING](CONTRIBUTING.md).
 
+**Search and filter every card at [richicinschi.github.io/awesome-agent-workflows](https://richicinschi.github.io/awesome-agent-workflows/).**
+
 ## Start here by situation
 
 - **I have a vague feature request** → [Spec → Plan → Implementation](workflows/01-spec-to-plan.md)
