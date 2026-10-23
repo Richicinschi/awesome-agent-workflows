@@ -25,8 +25,8 @@ The incident exposed the risks of allowing an AI coding agent to execute destruc
 
 ## Related workflows
 
-- [Agent Task Contract](../workflows/12-agent-task-contract.md) — Define scope, stop conditions, and approval requirements.
-- [Migration Cutover Planner](../workflows/25-migration-cutover-planner.md) — Plan migrations, validation, and recovery.
+- [Agent Task Contract](https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/12-agent-task-contract.md?utm_source=chatgpt.com) — Define scope, stop conditions, and approval requirements.
+- [Migration Cutover Planner]((https://github.com/Richicinschi/awesome-agent-workflows/blob/main/workflows/25-migration-cutover-planner.md?utm_source=chatgpt.com)) — Plan migrations, validation, and recovery.
 
 ## Verification
 
