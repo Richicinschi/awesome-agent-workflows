@@ -1,71 +1,93 @@
 # MCP and Tool Integration Review
 
+> **Status: field-tested.** Distilled from vetting third-party agent skills, MCP servers and tool repos for a one-person studio that runs up to ten coding-agent sessions at once (2026).
+
 ## Trigger
 
-Adding or changing an MCP server, tool, plugin, or external integration.
+Someone wants an agent to load something it did not write: an MCP server, a CLI tool, a plugin, a hook, or a third-party agent skill (a SKILL.md, a prompt pack, a rules file). Also when an integration you already use asks for new permissions or ships a new upstream version.
 
 ## Goal
 
-Review permissions, data flow, failure modes, and least-privilege configuration.
+Nothing reaches an agent's context or tool list until it has passed a security scan, a human has read what it can execute and reach, and someone has checked that it fills a real gap. What gets adopted is the smallest safe part, rewritten in house style, with its upstream and licence recorded.
 
 ## Agent brief
 
 ```text
 You are executing the "MCP and Tool Integration Review" workflow.
 
-Context:
-- Repo/system: [name and path]
-- User goal: [goal]
-- Current state: [branch, issue, incident, test failure, or source material]
-- Allowed scope: [files, commands, services]
-- Forbidden scope: [secrets, production, unrelated files, destructive actions]
+Candidate: [repo URL, package name, MCP server, or skill path]
+Job it would do: [what the human wants it for]
+What we already have for that job: [existing skills, tools, scripts, docs]
+Scanner: [scanner command; static pass only unless spend is approved]
+Forbidden: installing, enabling or running the candidate before the gate clears;
+           copying files into the live skills or tools folder; paid scan passes.
+
+Do, in order:
+1. Scan the candidate before cloning or installing it. Save the report to a file.
+2. Triage every finding by reading the flagged file and line.
+3. List what it can execute, read, write and reach over the network.
+4. Fetch the licence and the default branch's last commit date from the source.
+5. Propose one disposition: SKIP, FOLD (into which existing item), NEW SKILL,
+   or NEW AGENT, with a one-line reason.
 
 Required output:
-- Scope summary
-- Actions taken
-- Evidence collected
-- Files changed
-- Verification commands and results
-- Open risks and decisions needed
+- Scan score and verdict; each finding marked real or false positive, with file:line
+- Capability table: commands, file paths, env vars, network hosts, secrets it touches
+- Licence (fetched, not inferred) and the attribution line to keep
+- Disposition and reason; for SKIP, why it died, so nobody re-evaluates it
+- The exact parts to adapt, if any, and what to strip
 ```
 
 ## Steps
 
-1. **Restate the contract.** Say what will be changed, what will not be changed, and what evidence is required.
-2. **Collect targeted context.** Read only the files, logs, docs, issues, or commands needed for this workflow.
-3. **List assumptions.** Mark each assumption as verified, unverified, or requiring human input.
-4. **Execute the smallest safe increment.** Prefer a small patch, checklist, doc update, or diagnostic over broad rewrites.
-5. **Record evidence inline.** Keep command names, exit codes, links, screenshots, or source paths with every claim.
-6. **Run workflow-specific verification.** Use the checklist below before reporting success.
-7. **Leave a handoff.** Include next actions, stop conditions, and what should not be trusted without re-checking.
+1. **Scan first, as a hard gate.** Run a skill or package security scanner before you clone, install or enable anything. Some scanners accept a remote git URL, so the code never lands in your tree. Default to the static pass. An LLM semantic pass may be billable; run it only when a human approves the spend. Save the report.
+2. **Triage by reading the flagged line, not the score.** A critical finding means stop and read. Prompt injection, data exfiltration or privilege escalation in code the tool actually runs is a hard block until a human clears each finding. Static heuristics cannot tell security or devops docs from malware, so check each finding at file:line before you believe it or dismiss it. The deciding question: is this executable payload, or documentation and templates?
+3. **Map what it can execute and reach.** For an MCP server or tool: every command it spawns, every path it reads or writes, every env var and secret it asks for, every host it calls, and whether it runs code it downloads. For a skill: scripts it tells the agent to run, install commands, and any instruction that widens permissions. Write it down as a table.
+4. **Check the source, not the shop window.** Fetch the licence file; no licence means no right to adapt, whatever the star count. Read the default branch's last commit date, not a "last pushed" field that fires on any branch. Compare the package publish date with repo activity. Note a single maintainer, no security contact, past CVEs, and risky features such as deserialization or running third-party code.
+5. **Decide the disposition against what you have.** SKIP if an existing skill, script or doc already does the job; this is the most common outcome. FOLD the one good idea into an existing item. NEW SKILL only for a real gap. NEW AGENT when the thing is an autonomous scan, report and act role. For an MCP server, ask whether a `curl` call or two lines of code would do the same job.
+6. **Check it works outside its home framework.** Skills generated for one framework often hardcode its runtime: its CLIs, daemons and state folders. Copied alone they are inert. If a candidate needs a runtime you will not install, treat it as reference reading.
+7. **Adapt only the safe parts.** Rewrite what you keep in your own conventions. Strip everything the scan flagged that you do not need. Bump pinned dependency versions that have known vulnerabilities. Retune defaults to your policy instead of inheriting upstream's.
+8. **Record attribution.** Put the upstream repo, path and licence in the adapted file's metadata. Keep the licence file where the licence requires it (ShareAlike, notices). Log the disposition with its reason, skips included.
+9. **Bound it at the tool layer.** Install at the narrowest scope, project rather than user-wide, with the fewest permissions. Where a rule must never break, enforce it with a hook that blocks the command, then test the hook by feeding it a forbidden command and checking that it refuses.
+10. **Land it through review.** Commit the adaptation on its own branch and let a human merge. Do not install from the agent's session straight into a shared skill or tool folder.
 
 ## Verification checklist
 
-- [ ] Scope boundaries and non-goals are explicit.
-- [ ] Every factual claim has evidence from a file, command, log, screenshot, issue, PR, or cited source.
-- [ ] Verification commands or observable checks are listed with results.
-- [ ] Human approval gates below were respected.
-- [ ] No secrets, credentials, private customer data, or unauthorized production actions are exposed.
+- [ ] A saved scan report exists for the exact version adopted, dated before the install.
+- [ ] Every finding above low has a file:line and a real or false-positive verdict.
+- [ ] A capability table lists commands, paths, env vars, network hosts and secrets.
+- [ ] The licence was fetched from the repo and permits the planned use.
+- [ ] The disposition names the existing item the candidate was compared against.
+- [ ] Adapted files carry upstream repo, path and licence in their metadata.
+- [ ] Any enforcing hook was fed a forbidden input and blocked it.
+- [ ] Every skipped candidate has a one-line reason on record.
 
 ## Failure modes
 
-- The agent broadens scope because it notices adjacent cleanup.
-- The agent treats a generated summary as evidence.
-- The agent reports success before running the final check.
-- The agent hides uncertainty instead of labeling unverified assumptions.
-- The agent changes public, production, or destructive state without approval.
+- Installing first and scanning later, so the scan reviews code that has already run.
+- Trusting a red score blindly. To static rules, devops and security skills can look exactly like malicious ones.
+- Trusting a green score blindly. A scanner is a gate, not an oracle; still read what the tool executes.
+- Reading popularity as fitness: stars without a licence, recent pushes on a side branch, a README written before an OS update broke the trick it relies on.
+- A licence the tooling cannot see. An API can report "no assertion" for a noncommercial licence, and lists and LLMs then pass it on as if it were permissive.
+- Copy-and-install: adopting a whole folder when one idea was worth folding in, which breeds duplicate skills.
+- Mistaking "related to my stack" for "is a skill". Framework dependencies belong in a package manager and starter templates in a clone, not in the agent's skill folder.
+- Treating zero adoptions as failure, so a weak candidate gets through to justify the review.
 
 ## Human gate
 
-Human approves tools that can read secrets, write files, call networks, or affect production.
+A human clears every high or critical finding before adoption, approves any paid scan pass, approves tools that can read secrets, write outside the repo, call the network or run downloaded code, and merges the adaptation.
 
-## Good output example
+## Field notes
 
-```text
-Summary: [one-paragraph result]
-Evidence: [commands, files, links]
-Changed: [files or none]
-Verification: [exact checks and results]
-Risks: [remaining uncertainty]
-Next: [safe next step]
-```
+- The standing rule is "never fork an external skill without scanning it first". The scan gates; adapting comes after and is separate work. The studio uses [SkillSpector](https://github.com/NVIDIA/SkillSpector), an open-source skill scanner, with the static pass only by default.
+- In one wave of four adopted skills, three scored 100/100 critical, "do not install". All three were false positives, checked line by line. The scanner read settings loaded from a `.env` file as credential access, the official `curl ... | sh` installer as chaining, and plain "Rules:" guidance as prompt extraction, and it also flagged an apt-cache `rm -rf` cleanup. None shipped a script the skill runs.
+- An agent framework of about 59 generated skills was reviewed one by one: 59 skip, 0 adopted, 2 marginal folds. Nearly every skill hardcoded a long preamble bound to the framework's own runtime, so a copied folder would have done nothing.
+- A research sweep over about 185 candidates adopted zero MCP servers, agents or skills. All four proposed MCP servers collapsed on verification, three because a `curl` or two lines of code did the same job. The recorded reasons were the durable output.
+- Popularity misled in four separate ways: "pushed yesterday" on a repo whose default branch was over two years stale, a package last published years before its repo's latest push, a skills repo with about 30k stars and no licence file, and a popular web library that does nothing on current phones since an OS patch.
+
+## Related workflows
+
+- [Security Review Sprint](05-security-review.md)
+- [Dependency Upgrade Shepherd](21-dependency-upgrade-shepherd.md)
+- [Prompt and Policy Change Control](31-prompt-policy-change-control.md)
+- [Secrets and Config Audit](38-secrets-config-audit.md)

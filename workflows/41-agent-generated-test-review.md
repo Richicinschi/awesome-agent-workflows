@@ -1,5 +1,7 @@
 # Agent-Generated Test Review
 
+> **Status: candidate.** Specific and reviewed, contributed by @luohui1 (#14), not yet field-tested on a real project. Used it on real work? Open a PR with a field note.
+
 ## Trigger
 
 An agent added or changed tests, and you need to decide whether those tests protect real behavior before trusting the patch.

@@ -1,5 +1,7 @@
 # Browser Runtime QA
 
+> **Status: draft.** This card still uses the generic template shared by the early cards and has not been field-tested yet. Help make it real: see [CONTRIBUTING](../CONTRIBUTING.md).
+
 ## Trigger
 
 A browser app, extension, public page, or automation flow needs validation.

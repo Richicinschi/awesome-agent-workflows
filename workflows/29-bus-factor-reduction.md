@@ -1,5 +1,7 @@
 # Knowledge Transfer and Bus-Factor Reduction
 
+> **Status: draft.** This card still uses the generic template shared by the early cards and has not been field-tested yet. Help make it real: see [CONTRIBUTING](../CONTRIBUTING.md).
+
 ## Trigger
 
 A system depends on one person, a rotation is coming, or ownership is changing.

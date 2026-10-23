@@ -1,71 +1,97 @@
 # Agent Task Contract and Scope Box
 
+> **Status: field-tested.** Distilled from briefing subagents and parallel coding-agent sessions in a one-person studio that runs up to ten sessions at once (2026).
+
 ## Trigger
 
-Before delegating a task to an AI agent.
+You are about to hand a task to an agent that does not share your context: a subagent, a second session, another tool or model. It matters most when other agents are live in the same workspace, or when several briefs come out of one plan.
 
 ## Goal
 
-Give the agent a contract that prevents drive-by edits and unsupported success claims.
+A brief the agent can execute without your conversation: one outcome, a measured list of files it may edit, the forbidden actions that matter in this workspace, the lessons earlier agents paid for, a done condition that is a command, and a report you can check against disk.
 
 ## Agent brief
 
 ```text
-You are executing the "Agent Task Contract and Scope Box" workflow.
+Goal: [one sentence describing the outcome, not the activity]
 
-Context:
-- Repo/system: [name and path]
-- User goal: [goal]
-- Current state: [branch, issue, incident, test failure, or source material]
-- Allowed scope: [files, commands, services]
-- Forbidden scope: [secrets, production, unrelated files, destructive actions]
+First, read [path to the dispatch-lessons file]. It lists environment facts and
+mistakes earlier agents made. Follow it.
 
-Required output:
-- Scope summary
-- Actions taken
-- Evidence collected
-- Files changed
-- Verification commands and results
-- Open risks and decisions needed
+Workspace: [absolute repo or worktree path]. Use absolute paths in every command.
+
+Scope box:
+- Edit only: [measured file list]
+- Read as needed: [paths]
+- Preserve: [what must survive unchanged: history entries, public names, approved wording]
+- Never: [commit / switch branches / stash / clean / stage everything],
+  write [shared files], run [builds, deploys, paid or public actions],
+  change [shared rules or interfaces]
+
+Rules for the change: [exact rules, plus one worked before-and-after example]
+
+Done when: [acceptance criteria]
+Verify with: [exact command]. Report the exit code and the raw summary line,
+not a paraphrase.
+
+Stop and report instead of guessing if the work needs a file outside the box,
+a rule is ambiguous, or verification fails.
+
+Report:
+- Files changed (must be a subset of the edit list)
+- Files in the edit list you did not change, and why
+- Verification command, exit code, summary line
+- New friction: anything the next agent should be told up front
 ```
 
 ## Steps
 
-1. **Restate the contract.** Say what will be changed, what will not be changed, and what evidence is required.
-2. **Collect targeted context.** Read only the files, logs, docs, issues, or commands needed for this workflow.
-3. **List assumptions.** Mark each assumption as verified, unverified, or requiring human input.
-4. **Execute the smallest safe increment.** Prefer a small patch, checklist, doc update, or diagnostic over broad rewrites.
-5. **Record evidence inline.** Keep command names, exit codes, links, screenshots, or source paths with every claim.
-6. **Run workflow-specific verification.** Use the checklist below before reporting success.
-7. **Leave a handoff.** Include next actions, stop conditions, and what should not be trusted without re-checking.
+1. **Check the task deserves a brief.** If the brief would be longer than doing the work, or the task needs judgement, crosses repositories, or needs git operations, keep it. For routine, well-specified work, one brief and one final review beat a reviewer agent per task.
+2. **Write the goal as an outcome.** "Every page uses the new product name and historical entries are untouched", not "update the naming".
+3. **Measure the edit list.** Produce it with a search or a listing and paste it into the brief. Say what to preserve and what to rewrite.
+4. **Name this workspace's forbidden actions.** "Be careful" does nothing. List the concrete shared surfaces: git operations in a shared checkout, builds and caches, a shared browser session, shared ledgers, rules other agents rely on, plus anything public, paid or destructive.
+5. **Make it self-contained.** Assume the agent sees only the brief: goal, exact files, exact rules, what to preserve, acceptance criteria, absolute paths, and environment facts such as which interpreter works.
+6. **Point at the lessons file first.** The first instruction after the goal is "read the lessons file". Agents have no memory of each other, so the file is the only carrier of what earlier agents learned, and unlike a chat message it survives context compaction.
+7. **Define done as a command.** Give the exact verification command and ask for the exit code read directly, not through a pipe, plus the raw summary line.
+8. **Check the report against disk.** Compare `git diff --name-only` with the edit list, look at every listed file that did not change, and rerun the verification yourself.
+9. **Feed the lessons file.** Append any new friction the agent reported. If you had to send a mid-task correction, that correction goes into the file before the next brief goes out.
 
 ## Verification checklist
 
-- [ ] Scope boundaries and non-goals are explicit.
-- [ ] Every factual claim has evidence from a file, command, log, screenshot, issue, PR, or cited source.
-- [ ] Verification commands or observable checks are listed with results.
-- [ ] Human approval gates below were respected.
-- [ ] No secrets, credentials, private customer data, or unauthorized production actions are exposed.
+- [ ] Someone who has not seen your conversation could execute the brief as written.
+- [ ] The edit list came from a command, and the preserve list is explicit.
+- [ ] Forbidden actions name concrete shared resources in this workspace.
+- [ ] Done is a command with an expected result.
+- [ ] The returned diff is a subset of the edit list.
+- [ ] Every edit-list file that was not changed is explained in the report.
+- [ ] The lead reran the verification and read the exit code directly.
+- [ ] New friction, and any correction sent mid-task, is in the lessons file.
 
 ## Failure modes
 
-- The agent broadens scope because it notices adjacent cleanup.
-- The agent treats a generated summary as evidence.
-- The agent reports success before running the final check.
-- The agent hides uncertainty instead of labeling unverified assumptions.
-- The agent changes public, production, or destructive state without approval.
+- **Context the agent never had.** The brief leans on your conversation, so the agent fills the gaps with guesses.
+- **An inferred edit list.** In one sub-project the list was too narrow four separate times, each discovered only after the agents finished.
+- **A silent scope box.** Nothing forbids git operations or builds in a shared checkout, so a well-meaning agent commits, stashes or rebuilds under other live sessions.
+- **Trusting the summary.** An agent reported success while silently skipping an entire assigned spec file. Only checking the files on disk caught it.
+- **Re-teaching by message.** A correction sent in chat helps one agent; the next agent repeats the mistake.
+- **Briefs from a stale plan.** A rename landed in code but not in the plan, so the next wave was briefed against a field that no longer existed.
+- **Ceremony on routine work.** Identical implement-then-review cycles on mechanical tasks added noise, not safety, and the human stopped them as too repetitive.
 
 ## Human gate
 
-Human approves scope, forbidden actions, and verification before the agent starts.
+The human approves the scope box (edit list, forbidden actions, done condition) before dispatch whenever the task touches a shared surface, public state, money or deletion. Widening the box mid-task is a human decision: the agent stops and reports instead of expanding scope on its own.
 
-## Good output example
+## Field notes
 
-```text
-Summary: [one-paragraph result]
-Evidence: [commands, files, links]
-Changed: [files or none]
-Verification: [exact checks and results]
-Risks: [remaining uncertainty]
-Next: [safe next step]
-```
+- The dispatch-lessons file came out of a campaign of sequential implementer agents. One stalled by ending its turn while a full test run was still going in the background, leaving its work uncommitted. The human's directive: learn from agent limitations as they happen, so no later agent repeats them. The file sits next to the campaign's progress ledger.
+- What went into it was mostly environment facts no agent could guess: the system interpreter was broken and a specific one had to be used, the shell's working directory reset between commands, git staging needed discipline, and commit signing could hang.
+- A mostly mechanical find-and-replace across 24 files ran in the foreground for about 30 minutes. A self-contained brief of about 30 lines (goal, exact files, exact rules, what to preserve, acceptance criteria) would have let it run in parallel.
+- A check judged through a pipe reported success while the command was returning 1, which is why the brief asks for the exit code read directly. More cases in [when the verification evidence itself was wrong](../examples/field-story-verification-evidence-lied.md).
+
+## Related workflows
+
+- [Parallel Agent Development](02-parallel-agent-development.md)
+- [Git Worktree Agent Lanes](35-git-worktree-agent-lanes.md)
+- [Fresh-Context Code Review](04-fresh-context-code-review.md)
+- [Context Compaction and Handoff](36-context-compaction-handoff.md)
+- [Worked example: diff review catches agent scope drift](../examples/agent-scope-drift-caught-by-diff-review.md)
