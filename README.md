@@ -97,6 +97,7 @@ Use the same workflows with different agents:
 - [Aider](docs/tools/aider.md)
 - [OpenCode](docs/tools/opencode.md)
 - [Local/self-hosted agents](docs/tools/local-agents.md)
+- [LazyMind Skill → Workflow](docs/tools/lazymind.md)
 - [Agent tool comparison matrix](docs/tools/comparison-matrix.md)
 
 ## Worked examples
